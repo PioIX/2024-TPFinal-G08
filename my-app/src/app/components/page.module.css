@@ -85,6 +85,10 @@
   font-weight: 500;
 }
 
+.header{
+  
+}
+
 a.primary {
   background: var(--foreground);
   color: var(--background);

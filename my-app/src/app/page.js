@@ -1,5 +1,6 @@
 "use client";
 
+/*
 const idUser = -1
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -106,4 +107,15 @@ export default function Login() {
       </div>
     </section>
   );
+}
+*/
+
+import Header from '@/app/components/Header'
+
+export default function Login() {
+  return (
+    <>
+      <Header></Header>
+    </>
+  )
 }
