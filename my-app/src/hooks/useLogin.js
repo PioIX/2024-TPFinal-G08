@@ -1,5 +1,3 @@
-
-
 import { useAuth } from "@/app/context/AuthContext"
 
 const useLogin = () => {
@@ -8,4 +6,4 @@ const useLogin = () => {
     return [idUser, setIdUser]
 }
 
-export { useLogin } 
+export { useLogin }
