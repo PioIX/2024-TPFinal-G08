@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useLogin } from '@/app/hooks/useLogin';
 import { useEffect } from 'react';
+import HelpIcon from '@/components/helpicon';  // Ajusta la ruta si es necesario
+
 
 export default function Login() {
   const [idUser, setIdUser] = useLogin()
@@ -98,6 +100,7 @@ export default function Login() {
                 <button className="btn btn-success btn-lg btn-block" type="submit" onClick={registro}>Registrarse</button>
                 <hr className="my-4" />
               </div>
+              <HelpIcon></HelpIcon>
             </div>
           </div>
         </div>

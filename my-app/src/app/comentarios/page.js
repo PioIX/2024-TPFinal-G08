@@ -197,3 +197,15 @@ export default function Home() {
     </section>
   );
 } */
+
+import HelpIcon from "@/components/helpicon";
+
+
+export default function home(){
+  return(
+    <>
+      <p>hoal</p>
+      <HelpIcon></HelpIcon>
+    </>
+  )
+}
