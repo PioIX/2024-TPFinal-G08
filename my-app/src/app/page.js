@@ -90,7 +90,7 @@ export default function Login() {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div className="card shadow-2-strong" style={{ borderRadius: '1rem' }}>
                 <div className="card-body p-5 text-center">
-                  <h3 className="mb-5" style={{ color: '#d8bfc5' }}>Log in</h3>
+                  <h3 className="mb-5" style={{ color: '#d8bfc5' }}>Login</h3>
                   <div className="form-outline mb-4">
                     <input type="email" id="mail" className="form-control form-control-lg" />
                     <label className="form-label" htmlFor="typeEmailX-2" style={{ color: '#d8bfc5' }}>Nombre</label>
@@ -99,7 +99,7 @@ export default function Login() {
                     <input type="password" id="contrasena" className="form-control form-control-lg" />
                     <label className="form-label" htmlFor="typePasswordX-2" style={{ color: '#d8bfc5' }}>Contraseña</label>
                   </div>
-                  <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', margin: '10px', border: 'none' }} onClick={login}>Login</button>
+                  <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', margin: '10px', border: 'none' }} onClick={login}>Ingresar</button>
                   <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none' }} onClick={registro}>Registrarse</button>
                   <hr className="my-4" />
                 </div>

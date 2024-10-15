@@ -2,6 +2,7 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '@/components/page.module.css'
 
+
 export default function Headwer() {
   return (
     <div className={styles.headwer}>
