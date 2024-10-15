@@ -1,55 +1,16 @@
-"use client"
-//Compontente FUNCIONAL
-/*
-export default function Button() {
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from '@/components/page.module.css'
 
-    function funcion() {
-        console.log("Buenasss")
-    }
-
-    return(
-        <button onClick={funcion}>Registrarme</button>
-    )
-}
-*/
-
-// PROPS
-
-//children: siempre existe, el hijo de la etiwueta html
-// Las demás uno les asigna el nombre
-
-/*export default function Button(link, texto) {
-
-
-    return(
-            <button type="button">{texto}</button>
-    )
-}
-*/
-
-import Link from 'next/link';
-import styles from './page.module.css';
-
-export default function Header({text}){
+export default function Headwer() {
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>{text}</div>
-    </header>
+    <div className={styles.headwer}>
+        {/* Imagen del moño */}
+        <img src="/MOÑOOO.png" className={styles.mono}></img>
+        {/* Texto al lado de la imagen */}
+        <h1 className={styles.dress}>
+          Dress To Impress!
+        </h1>
+    </div>
   );
-};
-
-/*
-import Link from 'next/link';
-import styles from './page.module.css';
-
-export default function Header(){
-  return (
-    <header className={styles.header}>
-      <div className={styles.logo}>Home</div>
-      <nav className={styles.nav}>
-        <Link href="/classroom">Home</Link>
-      </nav>
-    </header>
-  );
-};
-*/
+}
