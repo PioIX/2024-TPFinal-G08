@@ -9,7 +9,7 @@ export default function HelpIcon(){
     <div className="fixed top-5 right-5 mt-2">
       <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300">
         <Link href={'/menu/reglas'}>
-        <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff',   padding: '5px 10px',  border: 'none', fontFamily: 'Poppins, sans-serif', fontSize: "14px", position: 'absolute', top: '10px', right: '10px'  }}>AYUDA</button>          
+        <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff',   padding: '5px 10px',  border: 'none', fontFamily: 'Poppins, sans-serif', fontSize: "14px", position: 'absolute', bottom: '10px', right: '10px'  }}>AYUDA</button>          
         </Link>
       </div>
     </div>
