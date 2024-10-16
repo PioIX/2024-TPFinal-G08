@@ -2,6 +2,7 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import HelpIcon from '@/components/helpicon';
 
 export default function pagina() {
   return (
@@ -22,6 +23,7 @@ export default function pagina() {
           <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', margin: '10px', border: 'none', fontFamily: 'Poppins, sans-serif' }}>VER OUTFITS</button>
           <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif'  }}>TABLA DE PUNTAJES</button>
         </div>
+        <HelpIcon></HelpIcon>
       </section>
     </>
   );
