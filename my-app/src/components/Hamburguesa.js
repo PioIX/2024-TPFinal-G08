@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import styles from '@/components/page.module.css';
 
 export default function Hamburguesa() {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,13 +9,24 @@ export default function Hamburguesa() {
         setIsOpen(!isOpen);
     };
 
+    const handleMenuClick = () => {
+        window.location.href = '/menu'; // Redirige a /menu
+    };
+
+    const handleLogout = () => {
+        // Elimina la cookie de idUser
+        document.cookie = 'idUser=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        // Redirige a la página de inicio
+        window.location.href = '/'; // Cambia esto a '/' para redirigir a la página de inicio
+    };
+
     return (
         <>
             <nav className="navbar" style={{ 
                 position: 'absolute', 
                 top: 0, 
                 right: 0, 
-                backgroundColor: '#fbfcf7', // Color de la barra de navegación
+                backgroundColor: '#fbfcf7', 
                 width: '4%' 
             }}>
                 <button 
@@ -37,9 +47,21 @@ export default function Hamburguesa() {
             }}>
                 <div className="shadow-3 p-4">
                     <p style={{ textDecoration: 'none', color: '#d8bfc5' }}>Usuario: </p>
-                    <button className="btn btn-link btn-block border-bottom m-0 text-start" style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }}>Menu</button>
+                    <button 
+                        className="btn btn-link btn-block border-bottom m-0 text-start" 
+                        style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }} 
+                        onClick={handleMenuClick}
+                    >
+                        Menu
+                    </button>
                     <br />
-                    <button className="btn btn-link btn-block border-bottom m-0 text-start" style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }}>Log Out</button>
+                    <button 
+                        className="btn btn-link btn-block border-bottom m-0 text-start" 
+                        style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }} 
+                        onClick={handleLogout} // Maneja el clic en el botón de Log Out
+                    >
+                        Log Out
+                    </button>
                     <br />
                     <button className="btn btn-link btn-block m-0 text-start" style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }}>Link 3</button>
                 </div>
