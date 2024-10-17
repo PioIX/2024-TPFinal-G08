@@ -6,19 +6,19 @@ import HelpIcon from '@/components/helpicon';
 
 export default function pagina() {
   const handleJugarClick = () => {
-    window.location.href = '/juego'; // Redirige a /juego
+    window.location.href = '/menu/juego'; // Redirige a /juego
   };
 
   const handleOutfitsClick = () => {
-    window.location.href = '/outfits'; // Redirige a /outfits
+    window.location.href = '/menu/outfits'; // Redirige a /outfits
   };
 
   const handlePuntajesClick = () => {
-    window.location.href = '/puntajes'; // Redirige a /puntajes
+    window.location.href = '/menu/puntajes'; // Redirige a /puntajes
   };
 
   const handleVotarClick = () => {
-    window.location.href = '/votar'; // Redirige a /votar
+    window.location.href = '/menu/votar'; // Redirige a /votar
   };
 
   return (
