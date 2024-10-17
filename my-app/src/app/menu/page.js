@@ -2,6 +2,7 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import Link from 'next/link';
 import HelpIcon from '@/components/helpicon';
 
 export default function pagina() {
@@ -35,6 +36,9 @@ export default function pagina() {
           <div style={{ marginBottom: '20px' }}>
             <img src="/ribbon.png" alt="Descripción de la imagen" className="img-fluid" style={{ height: '120px' }} />
           </div>
+          <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', margin: '10px', border: 'none', fontFamily: 'Poppins, sans-serif' }}>JUGAR</button>
+          <button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', margin: '10px', border: 'none', fontFamily: 'Poppins, sans-serif' }}>VER OUTFITS</button>
+          <Link href="/menu/puntajes"><button className="btn btn-success btn-lg btn-block" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif'  }}>TABLA DE PUNTAJES</button></Link>
           <button 
             className="btn btn-success btn-lg btn-block" 
             type="button" 
