@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 
-export default function Votacion() {
+export default function Outfits() {
   return (
     <>       
       <HelpIcon></HelpIcon>
