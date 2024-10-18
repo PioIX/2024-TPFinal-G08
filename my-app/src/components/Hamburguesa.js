@@ -63,7 +63,6 @@ export default function Hamburguesa() {
                         Log Out
                     </button>
                     <br />
-                    <button className="btn btn-link btn-block m-0 text-start" style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }}>Link 3</button>
                 </div>
             </div>
         </>
