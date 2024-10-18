@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Link from 'next/link';
 import HelpIcon from '@/components/helpicon';
+import Hamburguesa from '@/components/Hamburguesa';
 
 export default function pagina() {
   const handleJugarClick = () => {
