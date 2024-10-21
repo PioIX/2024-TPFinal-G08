@@ -3,6 +3,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Header from '@/components/Header';
+import Hamburguesa from '@/components/Hamburguesa';
+import HelpIcon from '@/components/helpicon';
+
 
 export default function pagina() {
   return (
@@ -12,6 +15,7 @@ export default function pagina() {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <Header />
+      <Hamburguesa></Hamburguesa>
       <section className="vh-100" style={{ backgroundColor: '#fbfcf7' }}>
         <div className="text-center">
           <h2 className="mb-0" style={{ color: '#d8bfc5', fontSize: '3rem', fontFamily: 'Lora, serif' }}>
@@ -38,6 +42,7 @@ export default function pagina() {
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#bfb8b8' }}>Cantidad de outfits</h3>
           </div>
+          <HelpIcon></HelpIcon>
         </div>
         </div>
       </section>
