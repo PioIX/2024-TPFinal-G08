@@ -11,7 +11,15 @@ import { useState } from 'react';
 
 export default function Game() {
   const [selectedCategory, setSelectedCategory] = useState('tops');
-  const categories = ['tops', 'bottoms', 'accessories', 'shoes'];
+  const categories = [
+    { name: 'tops', img: '4.png' },
+    { name: 'bottoms', img: '6.png' },
+    { name: 'shoes', img: '7.png' },
+    { name: 'accessories', img: '8.png' },
+    { name: 'people', img: '5.png' },
+    { name: 'pets', img: '9.png' },
+    { name: 'backgrounds', img: '10.png' },
+  ];
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -22,21 +30,16 @@ export default function Game() {
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-        <style>{`
-          body {
-            background-color: #fbf3f3; /* Rosita pastel */
-          }
-        `}</style>
       </Head>
 
       <Header />
       <Hamburguesa />
       <HelpIcon />
 
-      <section style={{ backgroundColor: '#fbf3f3', minHeight: '100vh', padding: '20px' }}>
+      <section style={{ backgroundColor: '#fbfcf7', minHeight: '100vh', padding: '20px' }}>
         {/* Div de fondo que cubre todos los elementos */}
         <div style={{ 
-          backgroundColor: '#ffe0e9', /* Rosita pastel más fuerte para el fondo */
+          backgroundColor: '#fbf3f3', /* Rosita pastel más fuerte para el fondo */
           padding: '20px', 
           borderRadius: '10px', 
           width: '80%',  /* Achicado el fondo */
@@ -55,37 +58,49 @@ export default function Game() {
             </div>
 
             {/* Panel de selección de ropa */}
-            <div className="clothing-panel" style={{ width: '55%', textAlign: 'center', padding: '20px' }}>
-              {/* Contenedor de ropa */}
-              <div className="clothing-items" style={{ backgroundColor: '#fff6f2', padding: '20px', borderRadius: '10px', minHeight: '300px' }}>
-                <p style={{ color: '#bf97a0', fontFamily: 'Lora, serif' }}>Selecciona {selectedCategory}</p>
+            <div className="clothing-panel" style={{ width: '55%', textAlign: 'center', padding: '20px', backgroundColor: "#efe8e5", borderRadius: '10px'  }}>
 
-                {/* Botones de categoría dentro del contenedor */}
-                <div className="category-selector" style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-                  {categories.map((category) => (
+              {/* Nuevo contenedor para los botones y el selector de prendas */}
+              <div className="buttons-and-selector-container" style={{ marginBottom: '20px' }}>
+                {/* Contenedor solo para los botones */}
+                <div className="category-selector" style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
+                  {categories.map(({ name, img }) => (
                     <button 
-                      key={category} 
-                      onClick={() => handleCategoryChange(category)}
+                      key={name} 
+                      onClick={() => handleCategoryChange(name)}
                       style={{
                         padding: '10px',
                         border: 'none',
-                        backgroundColor: selectedCategory === category ? '#c87c8d' : '#efe8e5',
-                        color: '#fff',
+                        backgroundColor: selectedCategory === name ?  '#bf97a0' : '#fbf3f3',
                         borderRadius: '5px',
-                        fontFamily: 'Poppins, sans-serif',
                       }}>
-                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                      {/* Imagen en lugar de texto dentro del botón */}
+                      <img 
+                        src={`/${img}`} // Ruta de la imagen que usarás para los botones
+                        alt={name} 
+                        style={{ width: '40px', height: '40px' }} 
+                      />
                     </button>
                   ))}
                 </div>
 
-                {/* Imagen de prenda seleccionada */}
-                <img src={`/${selectedCategory}.png`} alt={selectedCategory} style={{ width: '60px', margin: '10px' }} />
-              </div>
+                {/* Selector de prenda */}
+                <div className="clothing-items" style={{ backgroundColor: '#fff6f2', padding: '20px', borderRadius: '10px', minHeight: '300px' }}>
+                  <img src={`/${selectedCategory}.png`} alt={selectedCategory} style={{ width: '60px', margin: '10px' }} />
+                </div>
+
+              </div> {/* Cierre del nuevo div buttons-and-selector-container */}
             </div>
           </div>
         </div>
       </section>
+
+      {/* Estilos globales para el body */}
+      <style jsx global>{`
+        body {
+          background-color: #fff; /* Cambia el color según lo que necesites */
+        }
+      `}</style>
     </>
   );
 }

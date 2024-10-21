@@ -3,11 +3,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
+import Header from '@/components/Header';
+import Hamburguesa from '@/components/Hamburguesa';
 
 export default function Votacion() {
   return (
     <>       
-      <HelpIcon></HelpIcon>
+      <Header />
+      <Hamburguesa />
+      <HelpIcon />
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
