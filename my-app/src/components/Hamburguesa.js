@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
 export default function Hamburguesa() {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -19,7 +18,7 @@ export default function Hamburguesa() {
         // Redirige a la página de inicio
         window.location.href = '/'; // Cambia esto a '/' para redirigir a la página de inicio
     };
-
+    
     return (
         <>
             <nav className="navbar" style={{ 

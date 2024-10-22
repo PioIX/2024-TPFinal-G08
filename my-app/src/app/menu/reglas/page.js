@@ -32,9 +32,6 @@ export default function Reglas() {
             padding: '20px' // Espaciado interno
           }}>
             <div style={{ flex: 1, textAlign: 'center' }}>
-              <h3 style={{ color: '#c87c8d', fontFamily: 'Lora, serif', fontSize: '1.75rem' }}>
-                Reglamento 
-              </h3>
               <ul style={{ 
                 listStylePosition: 'inside', 
                 padding: '0', 
