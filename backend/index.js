@@ -102,10 +102,29 @@ app.post('/registro', async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor." });
     }
 });
+app.get('/UsuariosGet', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT ID_Usuario, Nombre, Puntaje FROM Usuarios ORDER BY Puntaje DESC LIMIT 10");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en UsuariosGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
 
 app.get('/NombreGet', async (req, res) => {
     try {
         const respuesta = await MySQL.realizarQuery("SELECT Nombre FROM Usuarios");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en NombreGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/PuntajesGet', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT Puntaje FROM Usuarios");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en NombreGet: ", error);

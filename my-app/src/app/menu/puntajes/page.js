@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Header from '@/components/Header';
@@ -8,6 +8,18 @@ import Hamburguesa from '@/components/Hamburguesa';
 import Head from 'next/head'; // Importa el componente Head
 
 export default function Puntajes() {
+  const [usuarios, setUsuarios] = useState([]);
+
+  useEffect(() => {
+    const fetchUsuarios = async () => {
+      const response = await fetch('/UsuariosGet'); // Cambia aquí a tu nuevo endpoint
+      const data = await response.json();
+      setUsuarios(data);
+    };
+
+    fetchUsuarios();
+  }, []);
+
   return (
     <>
       <Head className="vh-100" style={{ backgroundColor: '#fbfcf7' }}>
@@ -36,9 +48,14 @@ export default function Puntajes() {
           }}>
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#bfb8b8' }}>Jugador</h3>
+              {usuarios.map(usuario => (
+                <p key={usuario.ID_Usuario}>{usuario.Nombre}</p>
+              ))}
             </div>
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#bfb8b8' }}>Puntaje</h3>
+              {usuarios.map(usuario => (
+                <p key={usuario.ID_Usuario}>{usuario.Puntaje}</p>))}
             </div>
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#bfb8b8' }}>Cantidad de outfits</h3>
