@@ -47,15 +47,18 @@ export default function Votacion() {
                  {/**DIV JUGADOR */}
                 {Array.from({ length: 5 }, (_, index) => (
                   <div key={index} style={{ flex: 1, textAlign: 'center' }}>
-                    <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
-                    <div style={{ 
-                      width: '100%',  
-                      height: '175%', 
-                      backgroundColor: '#fff6f2', 
-                      borderRadius: '10px', 
-                      margin: '0 auto',
-                      padding: '40px' 
-                    }}></div>
+                  <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
+                  <div style={{
+                    width: '100%',
+                    height: '70%',
+                    backgroundColor: '#fff6f2',
+                    borderRadius: '10px',
+                    margin: '0 auto',
+                    padding: '40px'
+                  }}>
+
+                    <img src="/personajes/nano.png" style={{ width: '168.75px', height: '300px' }}></img>
+                  </div>
 
                     <h5 style={{ color: '#bf97a0' }}>Puntaje</h5>
                     <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px' }}>
