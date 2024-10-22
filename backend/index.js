@@ -197,3 +197,75 @@ app.get('/get-chats/:id', async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
+//Juego
+
+app.get('/getRemeras', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Remeras");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/getPantalones', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Pantalones");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/getPersonajes', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Personajes");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/getCalzados', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Calzados");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/getAccesorios', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Accesorios");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/getMascotas', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Mascotas");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/getOutfits', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Outfits");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
