@@ -1,18 +1,15 @@
+//"use client"
 
 import { getRemeras } from '@/app/utils/api.js'
 import React from 'react'
+import MuestraRopa from '@/components/MuestraRopa'
 
 export default async function Juego(){
-    const remeras = await getRemeras();
+    const array = [1, 2, 3, 4, 5, 6]
 
     return(
         <>
-            <ul>
-                {remeras.map((remera) => (
-                    <img src={remera.link} style={{width: '225px', height: '400px'}}></img>
-                ))}
-            </ul>
-            <img src="/ropa/remeras/remera azul.png" style={{width: '225px', height: '400px'}}></img>
+            <MuestraRopa></MuestraRopa>
         </>
     )
 }
