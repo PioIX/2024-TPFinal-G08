@@ -2,44 +2,40 @@
 
 import { getRemeras } from '@/app/utils/api.js'
 import React, { useEffect, useState } from 'react'
-import Button from './Button';
+import styles from '@/components/page.module.css'
 
-export default function MuestraRopa(){
+
+export default function MuestraRopa() {
     const [remeras, setRemeras] = useState([]);
-
-    const [test, setTest] = useState([
-        {id: 1, link: "asdas"},
-        {id: 2, link: "asdasa"},
-        {id: 3, link: "asdasaa"},
-    ])
 
     async function obtenerRemeras() {
         let res = await getRemeras()
         setRemeras(res);
-        
     }
+
     useEffect(() => {
         obtenerRemeras();
-    },[])
+    }, [])
+
     useEffect(() => {
         console.log(remeras)
-    },[remeras])
-    
-    return(
+    }, [remeras])
+
+    return (
         <>
-            <div>
+            <div className={styles.MuestraRopa}>
                 {
-                    remeras.map(x => {
-                        {console.log(x)}
-                        <>
-                        <h1>HOLAAA</h1>
-                        <p>{x}</p>
-                        </>
-                    })
+                    remeras.map((remera, index) => (
+                        <img key={index} src={remera} style={{ width: '112.5px', height: '200px' }} alt={`Remera ${index}`} />
+                    ))
                 }
             </div>
-           
-            <img src="/ropa/remeras/remera azul.png" style={{width: '225px', height: '400px'}}></img>
+        </>
+    )
+}
+
+
+/*<img src="/ropa/remeras/remera azul.png" style={{width: '225px', height: '400px'}}></img>
             {remeras.map(remera => {
                 <>
                 <h1>HOLAAA</h1>
@@ -48,6 +44,4 @@ export default function MuestraRopa(){
             })
             }
             <Button onClick={obtenerRemeras} text="HOLAAAA"></Button>
-        </>
-    )
-}
+            */

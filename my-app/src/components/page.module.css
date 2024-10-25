@@ -62,6 +62,14 @@
   border-radius: 35px;
 }
 
+.MuestraRopa {
+  width: 480px;
+  height: 400px;
+  float: right; /* Alinea el div a la derecha */
+  position: relative;
+}
+
+
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);
