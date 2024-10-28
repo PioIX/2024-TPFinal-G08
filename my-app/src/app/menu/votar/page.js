@@ -1,12 +1,28 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
 
+
 export default function Votacion() {
+  const [outfits, setOutfits] = useState([]); // Estado para almacenar los outfits
+  useEffect(() => {
+    async function fetchOutfits() {
+      try {
+        const response = await fetch('/api/outfits'); // Cambia la URL según tu API
+        const data = await response.json();
+        setOutfits(data); // Guarda los outfits en el estado
+      } catch (error) {
+        console.error("Error al cargar los outfits:", error);
+      }
+    }
+
+    fetchOutfits(); // Carga los outfits al iniciar
+  }, []);
   return (
     <>       
       <Header></Header>
@@ -63,7 +79,7 @@ export default function Votacion() {
                         <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>2</button>
                         <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>3</button>
                         <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>4</button>
-                        <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>5</button>
+                        <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}   onClick={() => alert('¡Botón 5 presionado!')}>5 </button>
                     </div>
 
                   </div>
@@ -77,4 +93,5 @@ export default function Votacion() {
       <HelpIcon></HelpIcon>    </>
   );
 }
+
 
