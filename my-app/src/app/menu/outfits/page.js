@@ -13,13 +13,10 @@ export default function Outfits() {
       <Header />
       <Hamburguesa />
       <HelpIcon />
-
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
       </head>
-      <Header></Header>
-      <Hamburguesa></Hamburguesa>
       <section className="vh-100" style={{ backgroundColor: '#fbfcf7' }}>
         <div className="card-body p-2 text-center" >
           <h2 className="mb-4" style={{ color: '#c87c8d', fontSize: '2rem', marginTop: '2%', fontFamily: 'Lora, serif' }}>Top 5 más votados</h2>

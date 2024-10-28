@@ -25,6 +25,7 @@ export default function pagina() {
     window.location.href = '/menu/votar'; // Redirige a /votar
   };
 
+  const userIdFromCookie = document.cookie.match(/idUser=([^;]*)/)?.[1];
   
 
   return (

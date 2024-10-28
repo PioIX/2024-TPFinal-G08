@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import UserName from '@/components/UserName';
+
 export default function Hamburguesa() {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -44,8 +46,8 @@ export default function Hamburguesa() {
                 right: 0,
                 borderRadius: 10
             }}>
-                <div className="shadow-3 p-4">
-                    <p style={{ textDecoration: 'none', color: '#d8bfc5' }}>Usuario: </p>
+                <div className="shadow-3 p-4"> 
+                    <UserName />
                     <button 
                         className="btn btn-link btn-block border-bottom m-0 text-start" 
                         style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }} 

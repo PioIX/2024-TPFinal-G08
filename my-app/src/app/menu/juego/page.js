@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
+import UserName from '@/components/UserName';
 
 import Head from 'next/head';
 import { useState } from 'react';
@@ -37,26 +38,26 @@ export default function Game() {
       <HelpIcon />
 
       <section style={{ backgroundColor: '#fbfcf7', minHeight: '100vh', padding: '20px' }}>
-        <div style={{ 
-          backgroundColor: '#fbf3f3', 
-          padding: '20px', 
-          borderRadius: '10px', 
-          width: '80%', 
-          margin: '0 auto', 
-          zIndex: 1 
+        <div style={{
+          backgroundColor: '#fbf3f3',
+          padding: '20px',
+          borderRadius: '10px',
+          width: '80%',
+          margin: '0 auto',
+          zIndex: 1
         }}>
           <div className="game-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            
+
             <div className="avatar-panel" style={{ width: '40%', textAlign: 'center', padding: '20px' }}>
               <div style={{ backgroundColor: '#ffffff', padding: '15px', borderRadius: '10px', minHeight: '350px' }}>
-                <div style={{ 
-                  backgroundColor: '#bf97a0', 
-                  color: 'white', 
-                  borderRadius: '10px', 
-                  padding: '3px 5px', 
-                  marginBottom: '8px' 
+                <div style={{
+                  backgroundColor: '#bf97a0',
+                  color: 'white',
+                  borderRadius: '10px',
+                  padding: '3px 5px',
+                  marginBottom: '8px'
                 }}>
-                  Usuario
+                  <UserName />
                 </div>
                 <div className="avatar" style={{ padding: '20px', borderRadius: '10px' }}>
                   <img src="/avatar.png" alt="Avatar" style={{ width: '80%' }} />
@@ -68,19 +69,19 @@ export default function Game() {
               <div className="buttons-and-selector-container" style={{ marginBottom: '20px' }}>
                 <div className="category-selector" style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
                   {categories.map(({ name, img }) => (
-                    <button 
-                      key={name} 
+                    <button
+                      key={name}
                       onClick={() => handleCategoryChange(name)}
                       style={{
                         padding: '10px',
                         border: 'none',
-                        backgroundColor: selectedCategory === name ?  '#bf97a0' : '#fbf3f3',
+                        backgroundColor: selectedCategory === name ? '#bf97a0' : '#fbf3f3',
                         borderRadius: '5px',
                       }}>
-                      <img 
-                        src={`/${img}`} 
-                        alt={name} 
-                        style={{ width: '40px', height: '40px' }} 
+                      <img
+                        src={`/${img}`}
+                        alt={name}
+                        style={{ width: '40px', height: '40px' }}
                       />
                     </button>
                   ))}
