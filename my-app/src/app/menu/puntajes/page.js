@@ -5,16 +5,26 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Header from '@/components/Header';
 import HelpIcon from '@/components/helpicon';
 import Hamburguesa from '@/components/Hamburguesa';
-import Head from 'next/head'; // Importa el componente Head
+import Head from 'next/head';
 
 export default function Puntajes() {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
     const fetchUsuarios = async () => {
-      const response = await fetch('/UsuariosGet'); // Cambia aquí a tu nuevo endpoint
-      const data = await response.json();
-      setUsuarios(data);
+      try {
+        const response = await fetch('http://localhost:4000/UsuariosGet'); // Asegúrate de que la ruta sea correcta
+        if (!response.ok) {
+          throw new Error(`Error en la respuesta: ${response.statusText}`);
+        }
+        const data = await response.json();
+        
+        console.log("Data obtenida de UsuariosGet:", data); // Verifica qué estructura tiene `data`
+        
+        setUsuarios(data); // Aquí asumimos que `data` es un array de objetos [{ ID_Usuario, Nombre, Puntaje }]
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      }
     };
 
     fetchUsuarios();
@@ -47,18 +57,24 @@ export default function Puntajes() {
             padding: '20px' 
           }}>
             <div style={{ flex: 1, textAlign: 'center' }}>
-              <h3 style={{ color: '#bfb8b8' }}>Jugador</h3>
+              <h3 style={{ color: '#bf97a0', fontFamily: 'Lora, serif', fontSize: '1.5rem' }}>Jugador</h3>
               {usuarios.map(usuario => (
-                <p key={usuario.ID_Usuario}>{usuario.Nombre}</p>
+                <p style={{ color: '#d8bfc5', fontWeight: 'bold', fontFamily: 'Lora, serif' }} key={usuario.ID_Usuario}>
+                  {usuario.Nombre}
+                </p>
               ))}
             </div>
             <div style={{ flex: 1, textAlign: 'center' }}>
-              <h3 style={{ color: '#bfb8b8' }}>Puntaje</h3>
+              <h3 style={{ color: '#bf97a0', fontFamily: 'Lora, serif', fontSize: '1.5rem' }}>Puntaje</h3>
               {usuarios.map(usuario => (
-                <p key={usuario.ID_Usuario}>{usuario.Puntaje}</p>))}
+                <p style={{ color: '#d8bfc5', fontWeight: 'bold', fontFamily: 'Lora, serif' }} key={usuario.ID_Usuario}>
+                  {usuario.Puntaje}
+                </p>
+              ))}
             </div>
             <div style={{ flex: 1, textAlign: 'center' }}>
-              <h3 style={{ color: '#bfb8b8' }}>Cantidad de outfits</h3>
+              <h3 style={{ color: '#bf97a0', fontFamily: 'Lora, serif', fontSize: '1.5rem' }}>Cantidad de outfits</h3>
+              {/* Puedes agregar aquí cualquier otra información que necesites */}
             </div>
           </div>
         </div>
