@@ -64,9 +64,31 @@
 
 .MuestraRopa {
   width: 480px;
-  height: 400px;
+  height: 415px;
   float: right; /* Alinea el div a la derecha */
   position: relative;
+}
+
+.MuestraPersonaje{
+  z-index: 0;
+  position: relative;
+}
+
+.MuestraRemera{
+  z-index: 1;
+  position: relative;
+}
+
+.MuestraOutfit{
+  justify-content: space-around;
+  display: flex;
+  position: relative;
+}
+
+.ropa{
+  justify-content: space-around;
+  display: flex;
+
 }
 
 

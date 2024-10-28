@@ -15,12 +15,7 @@ export async function getRemeras() {
     //Tengo que usar el await porque la respuesta del servidor es lenta
     const result = await response.json()
     console.log(result)
-    let links = []
-    for (let i = 0; i < result.length; i++) {
-        const element = result[i];
-        links.push(element.link)
-    }
-    return links
+    return result
 }
 
 //TRAE PANTALONES
