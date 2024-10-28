@@ -75,7 +75,7 @@ export default function Votacion() {
           </div>
         </div>
       </section>
-    </>
+      <HelpIcon></HelpIcon>    </>
   );
 }
 
