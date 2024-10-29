@@ -47,8 +47,8 @@ export default function Puntajes() {
         </div>
         <div className="text-center" style={{ marginTop: '20px', height: '30vh' }}>
           <div style={{ 
-            width: '80%',  
-            height: '240%', 
+            width: '70%',  
+            height: '220%', 
             backgroundColor: '#efe8e5', 
             borderRadius: '10px', 
             margin: '0 auto',
@@ -59,7 +59,19 @@ export default function Puntajes() {
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#bf97a0', fontFamily: 'Lora, serif', fontSize: '1.5rem' }}>Jugador</h3>
               {usuarios.map(usuario => (
-                <p style={{ color: '#d8bfc5', fontWeight: 'bold', fontFamily: 'Lora, serif' }} key={usuario.ID_Usuario}>
+                <p style={{
+                  backgroundColor: '#fff6f2',
+                  color: '#d8bfc5',
+                  fontWeight: 'bold',
+                  fontFamily: 'Lora, serif',
+                  fontSize: '1rem', // Tamaño compacto de fuente
+                  padding: '6px 12px', // Asegura espacio suficiente sin ensanchar demasiado
+                  margin: '6px auto', // Centra cada "cuadradito" y lo separa verticalmente
+                  borderRadius: '6px',
+                  display: 'block', // Mantiene los elementos en una nueva línea cada uno
+                  width: '65%', // Reduce el ancho para hacerlos más angostos
+                  textAlign: 'center'
+                }} key={usuario.ID_Usuario}>
                   {usuario.Nombre}
                 </p>
               ))}
@@ -67,14 +79,40 @@ export default function Puntajes() {
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#bf97a0', fontFamily: 'Lora, serif', fontSize: '1.5rem' }}>Puntaje</h3>
               {usuarios.map(usuario => (
-                <p style={{ color: '#d8bfc5', fontWeight: 'bold', fontFamily: 'Lora, serif' }} key={usuario.ID_Usuario}>
+                <p style={{ 
+                  backgroundColor: '#fff6f2',
+                  color: '#d8bfc5',
+                  fontWeight: 'bold',
+                  fontFamily: 'Lora, serif',
+                  fontSize: '1rem', // Tamaño compacto de fuente
+                  padding: '6px 12px', // Asegura espacio suficiente sin ensanchar demasiado
+                  margin: '6px auto', // Centra cada "cuadradito" y lo separa verticalmente
+                  borderRadius: '6px',
+                  display: 'block', // Mantiene los elementos en una nueva línea cada uno
+                  width: '65%', // Reduce el ancho para hacerlos más angostos
+                  textAlign: 'center'}} key={usuario.ID_Usuario}>
                   {usuario.Puntaje}
                 </p>
               ))}
             </div>
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#bf97a0', fontFamily: 'Lora, serif', fontSize: '1.5rem' }}>Cantidad de outfits</h3>
-              {/* Puedes agregar aquí cualquier otra información que necesites */}
+              {usuarios.map(usuario => (
+                <p style={{ 
+                  backgroundColor: '#fff6f2',
+                  color: '#d8bfc5',
+                  fontWeight: 'bold',
+                  fontFamily: 'Lora, serif',
+                  fontSize: '1rem', // Tamaño compacto de fuente
+                  padding: '6px 12px', // Asegura espacio suficiente sin ensanchar demasiado
+                  margin: '6px auto', // Centra cada "cuadradito" y lo separa verticalmente
+                  borderRadius: '6px',
+                  display: 'block', // Mantiene los elementos en una nueva línea cada uno
+                  width: '65%', // Reduce el ancho para hacerlos más angostos
+                  textAlign: 'center'}} key={usuario.ID_Usuario}>
+                  {usuario.CantidadOutfits}
+                </p>
+              ))}
             </div>
           </div>
         </div>

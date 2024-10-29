@@ -104,7 +104,7 @@ app.post('/registro', async (req, res) => {
 });
 app.get('/UsuariosGet', async (req, res) => {
     try {
-        const respuesta = await MySQL.realizarQuery("SELECT ID_Usuario, Nombre, Puntaje FROM Usuarios ORDER BY Puntaje DESC LIMIT 10");
+        const respuesta = await MySQL.realizarQuery("SELECT ID_Usuario, Nombre, Puntaje, CantidadOutfits FROM Usuarios ORDER BY Puntaje DESC LIMIT 10");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en UsuariosGet: ", error);
@@ -148,6 +148,16 @@ app.get('/ContraseñaGet', async (req, res) => {
         res.send(respuesta);
     } catch (error) {
         console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/CantidadOutfitsGet', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT CantidadOutfits FROM Usuarios");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en CantidadOutfitsGet: ", error);
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
