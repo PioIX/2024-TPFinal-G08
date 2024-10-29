@@ -95,14 +95,13 @@ export default function Game() {
             </div>
           </div>
 
-          {/* Botones de acción debajo del div del avatar */}
           <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
             <button style={{
               padding: '10px 20px',
               border: 'none',
               backgroundColor: '#bf97a0',
               color: 'white',
-              borderRadius: '20px', // Más redondeado
+              borderRadius: '20px', 
               cursor: 'pointer',
             }}>
               Guardar Outfit
@@ -112,7 +111,7 @@ export default function Game() {
               border: 'none',
               backgroundColor: '#bf97a0',
               color: 'white',
-              borderRadius: '20px', // Más redondeado
+              borderRadius: '20px', 
               cursor: 'pointer',
             }}>
               Salir sin Guardar

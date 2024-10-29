@@ -103,6 +103,27 @@ app.post('/registro', async (req, res) => {
     }
 });
 
+
+app.get('/api/get-user', async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "No autorizado. Usuario no logueado." });
+  }
+
+  try {
+    const query = `SELECT Nombre FROM Usuarios WHERE ID_Usuario = ${req.session.userId}`;
+    const resultado = await MySQL.realizarQuery(query);
+
+    if (resultado.length > 0) {
+      res.json({ name: resultado[0].Nombre });
+    } else {
+      res.status(404).json({ error: "Usuario no encontrado" });
+    }
+  } catch (error) {
+    console.error("Error en obtener usuario: ", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
 app.get('/NombreGet', async (req, res) => {
     try {
         const respuesta = await MySQL.realizarQuery("SELECT Nombre FROM Usuarios");
@@ -122,6 +143,27 @@ app.get('/UserIdGet', async (req, res) => {
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
+
+app.get('/api/get-user', async (req, res) => {
+    if (!req.session.userId) {
+      return res.status(401).json({ error: "No autorizado. Usuario no logueado." });
+    }
+  
+    try {
+      const query = `SELECT Nombre FROM Usuarios WHERE ID_Usuario = ${req.session.userId}`;
+      const resultado = await MySQL.realizarQuery(query);
+  
+      if (resultado.length > 0) {
+        res.json({ name: resultado[0].Nombre });
+      } else {
+        res.status(404).json({ error: "Usuario no encontrado" });
+      }
+    } catch (error) {
+      console.error("Error en obtener usuario: ", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  });
+  
 
 app.get('/ContraseñaGet', async (req, res) => {
     try {
