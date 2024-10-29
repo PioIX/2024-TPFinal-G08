@@ -53,7 +53,7 @@ export default function Hamburguesa() {
                         style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }} 
                         onClick={handleMenuClick}
                     >
-                        Menu
+                    Menu
                     </button>
                     <br />
                     <button 
@@ -61,7 +61,7 @@ export default function Hamburguesa() {
                         style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }} 
                         onClick={handleLogout} // Maneja el clic en el botón de Log Out
                     >
-                        Log Out
+                    Log Out
                     </button>
                     <br />
                 </div>

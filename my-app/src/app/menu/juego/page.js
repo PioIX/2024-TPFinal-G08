@@ -26,6 +26,10 @@ export default function Game() {
     setSelectedCategory(category);
   };
 
+  const handleMenuClick = () => {
+    window.location.href = '/menu'; // Redirige a /menu
+};
+
   return (
     <>
       <Head>
@@ -113,7 +117,8 @@ export default function Game() {
               color: 'white',
               borderRadius: '20px', 
               cursor: 'pointer',
-            }}>
+            }}
+            onClick={handleMenuClick}>
               Salir sin Guardar
             </button>
           </div>
