@@ -65,31 +65,38 @@
 .MuestraRopa {
   width: 480px;
   height: 415px;
-  float: right; /* Alinea el div a la derecha */
-  position: relative;
+  float: right; 
+  position: relative; 
 }
 
-.MuestraPersonaje{
-  z-index: 0;
-  position: relative;
+.MuestraPersonaje {
+  z-index: 0; 
+  position: relative; 
 }
 
-.MuestraRemera{
-  z-index: 1;
-  position: relative;
+.MuestraRemera {
+  z-index: 1; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
 }
 
-.MuestraOutfit{
+.MuestraOutfit {
   justify-content: space-around;
   display: flex;
-  position: relative;
+  position: relative; 
 }
 
-.ropa{
+.ropa {
   justify-content: space-around;
   display: flex;
-
 }
+
+.FotoRemera{
+  width: '270px'; 
+  height: '480px';
+}
+
 
 
 @media (hover: hover) and (pointer: fine) {
