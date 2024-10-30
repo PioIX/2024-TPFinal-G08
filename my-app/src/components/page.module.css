@@ -62,24 +62,30 @@
   border-radius: 35px;
 }
 
-.MuestraRopa {
-  width: 480px;
-  height: 415px;
-  float: right; 
-  position: relative; 
+.MuestraOutfit {
+  position: relative;
+  width: 65%; /* O el tamaño que necesites */
+  height: 350px; /* Ajusta según sea necesario */
+  margin: 0 auto;
+}
+
+.MuestraPersonaje img,
+.MuestraRemera img {
+  width: 100%; /* Ajusta según sea necesario */
+  height: auto; /* Mantiene la proporción */
 }
 
 .MuestraPersonaje {
-  z-index: 0; 
   position: relative; 
 }
 
 .MuestraRemera {
-  z-index: 1; 
   position: absolute; 
   top: 0; 
   left: 0; 
+  z-index: 1; 
 }
+
 
 .MuestraOutfit {
   justify-content: space-around;
