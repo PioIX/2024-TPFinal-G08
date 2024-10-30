@@ -8,12 +8,27 @@ import Hamburguesa from '@/components/Hamburguesa';
 
 
 export default function Outfits() {
+  const fetchPuntajeOutfits = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/OutfitsGet'); // Asegúrate de que la ruta sea correcta
+      if (!response.ok) {
+        throw new Error(`Error en la respuesta: ${response.statusText}`);
+      }
+      const data = await response.json();
+      
+      console.log("Data obtenida de outfitsGet:", data); // Verifica qué estructura tiene `data`
+      
+      setOutfits(data); // Aquí asumimos que `data` es un array de objetos [{ ID_Usuario, Nombre, Puntaje }]
+    } catch (error) {
+      console.error("Error al obtener los outfits:", error);
+    }
+  };
+
+  fetchPuntajeOutfits();
+}, []);
+
   return (
     <>       
-      <Header />
-      <Hamburguesa />
-      <HelpIcon />
-    
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
@@ -62,7 +77,6 @@ export default function Outfits() {
                       margin: '0 auto',
                       padding: '40px'
                     }}>
-
                       <img src="/personajes/nano.png" style={{ width: '168.75px', height: '300px' }}></img>
                     </div>
 
@@ -71,7 +85,6 @@ export default function Outfits() {
                       <p>x</p>
 
                     </div>
-                    <HelpIcon></HelpIcon>
                   </div>
                 ))}
 
@@ -79,8 +92,9 @@ export default function Outfits() {
             </div>
           </div>
         </div>
+        <HelpIcon></HelpIcon>
       </section>
-      <HelpIcon></HelpIcon>
+      
     </>
   );
 }
