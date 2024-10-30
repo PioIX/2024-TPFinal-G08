@@ -7,7 +7,7 @@ import MuestraRopa from '@/components/MuestraRopa'
 export default async function Juego(){
     return(
         <>
-            <MuestraRopa></MuestraRopa>
+            
         </>
     )
 }
