@@ -68,6 +68,7 @@ export default function Votacion() {
                         <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>4</button>
                         <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>5</button>
                     </div>
+                    <HelpIcon></HelpIcon>
 
                   </div>
                 ))}
