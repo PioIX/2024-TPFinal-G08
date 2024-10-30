@@ -13,7 +13,7 @@ export default function Outfits() {
       <Header />
       <Hamburguesa />
       <HelpIcon />
-
+    
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
@@ -26,52 +26,55 @@ export default function Outfits() {
         </div>
 
         <div className="text-center" style={{ marginTop: '-10px', height: 'auto' }}>
-        <div style={{ 
-                width: '90%',  
-                height: '75vh',  // Ajusta el tamaño para que no ocupe toda la pantalla
-                backgroundColor: '#efe8e5', 
-                borderRadius: '10px', 
-                margin: '0 auto',
-                padding: '20px'
-                }}>
-                  
+          <div style={{
+            width: '90%',
+            height: '75vh',  // Ajusta el tamaño para que no ocupe toda la pantalla
+            backgroundColor: '#efe8e5',
+            borderRadius: '10px',
+            margin: '0 auto',
+            padding: '20px'
+          }}>
+
             {/**OUTFITS */}
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#c87c8d', fontFamily: 'Lora, serif', fontSize: '1.75rem' }}>Outfits</h3>
-              <div style={{ 
-                fontFamily: 'Lora, serif', 
-                fontSize: '1.5rem', 
-                color: '#bf97a0',  
-                textAlign: 'center', 
-                display: 'flex', 
-                justifyContent: 'center',  
-                gap: '40px',  
-                marginTop: '20px', 
-                marginBottom: '20px' 
+              <div style={{
+                fontFamily: 'Lora, serif',
+                fontSize: '1.5rem',
+                color: '#bf97a0',
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '40px',
+                marginTop: '20px',
+                marginBottom: '20px'
               }}>
-                        
-                 {/**DIV JUGADOR */}
+
+                {/**DIV JUGADOR */}
                 {Array.from({ length: 5 }, (_, index) => (
                   <div key={index} style={{ flex: 1, textAlign: 'center' }}>
                     <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
-                    <div style={{ 
-                      width: '100%',  
-                      height: '175%', 
-                      backgroundColor: '#fff6f2', 
-                      borderRadius: '10px', 
+                    <div style={{
+                      width: '100%',
+                      height: '70%',
+                      backgroundColor: '#fff6f2',
+                      borderRadius: '10px',
                       margin: '0 auto',
-                      padding: '40px' 
-                    }}></div>
+                      padding: '40px'
+                    }}>
+
+                      <img src="/personajes/nano.png" style={{ width: '168.75px', height: '300px' }}></img>
+                    </div>
 
                     <h5 style={{ color: '#bf97a0' }}>Puntaje</h5>
                     <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', }}>
-                        <p>x</p>
+                      <p>x</p>
 
                     </div>
                     <HelpIcon></HelpIcon>
                   </div>
                 ))}
-                
+
               </div>
             </div>
           </div>
