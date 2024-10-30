@@ -5,7 +5,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
 import HelpIcon from '@/components/helpicon';
-import Hamburguesa from '@/components/Hamburguesa';
 import Head from 'next/head';
 
 export default function Puntajes() {
