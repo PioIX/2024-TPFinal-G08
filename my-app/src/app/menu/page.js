@@ -6,6 +6,8 @@ import Link from 'next/link';
 import HelpIcon from '@/components/helpicon';
 import { getRemeras, getPantalones, getPersonajes, getCalzados, getAccesorios, getMascotas, getOutfits } from '@/app/utils/api.js'
 import Hamburguesa from '@/components/Hamburguesa';
+import ChatBox from '@/components/ChatBox';
+
 
 
 export default function pagina() {
@@ -41,11 +43,12 @@ export default function pagina() {
           <div style={{ marginBottom: '20px' }}>
             <img src="/ribbon.png" alt="Descripción de la imagen" className="img-fluid" style={{ height: '120px' }} />
           </div>
+          <ChatBox></ChatBox>
           <button 
             className="btn btn-success btn-lg btn-block" 
             type="button" 
             style={{ backgroundColor: '#d8bfc5', color: '#fff', margin: '10px', border: 'none', fontFamily: 'Poppins, sans-serif' }} 
-            onClick={handleJugarClick} // Maneja el clic para JUGAR
+            onClick={handleJugarClick} 
           >
             JUGAR
           </button>
@@ -53,7 +56,7 @@ export default function pagina() {
             className="btn btn-success btn-lg btn-block" 
             type="button" 
             style={{ backgroundColor: '#d8bfc5', color: '#fff', margin: '10px', border: 'none', fontFamily: 'Poppins, sans-serif' }} 
-            onClick={handleOutfitsClick} // Maneja el clic para VER OUTFITS
+            onClick={handleOutfitsClick} 
           >
             VER OUTFITS
           </button>

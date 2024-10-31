@@ -298,3 +298,20 @@ app.get('/getOutfits', async (req, res) => {
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
+
+
+app.get('/NombreGet2', async (req, res) => {
+    const userId = req.query.userId; 
+    try {
+        const respuesta = await MySQL.realizarQuery(`SELECT Nombre FROM Usuarios WHERE userID = '${userId}'`);
+        if (respuesta.length > 0) {
+            res.send(respuesta[0]); 
+        } else {
+            res.status(404).send({ error: 'Usuario no encontrado' });
+        }
+    } catch (error) {
+        console.error("Error en NombreGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
