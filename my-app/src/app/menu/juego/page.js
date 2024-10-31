@@ -5,7 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
-import { getRemeras } from '@/app/utils/api.js';
+import { getRemeras, getPantalones } from '@/app/utils/api.js';
 import React, { useEffect, useState } from 'react';
 import styles from '@/components/page.module.css';
 import Head from 'next/head';
@@ -29,10 +29,17 @@ export default function Game() {
     const [remeras, setRemeras] = useState([]);
     const [remeraSeleccionada, setRemeraSeleccionada] = useState("");
 
+    const [pantalon, setPantalones] = useState([]);
+    const [pantalonSeleccionada, setPantalonSeleccionada] = useState("");
 
     async function obtenerRemeras() {
         let res = await getRemeras();
         setRemeras(res);
+    }
+
+    async function obtenerPantalones() {
+        let res = await getPantalones();
+        setPantalones(res);
     }
 
     useEffect(() => {
@@ -40,19 +47,27 @@ export default function Game() {
     }, []);
 
     useEffect(() => {
+        obtenerPantalones();
+    }, []);
+
+    useEffect(() => {
         console.log(remeras);
     }, [remeras]);
 
+    useEffect(() => {
+        console.log(pantalon);
+    }, [pantalon]);
+
     let outfit = {
         remeras: 0,
+        pantalones: 0,
         personaje: 1
     }
 
-    function ids(id) {
+    function idsRemeras(id) {
         outfit.remeras = id
         console.log(outfit);
         let newRemera = "";
-        console.log(remeras.idRemeras)
         console.log(outfit.remeras)
         for (let i = 0; i < remeras.length; i++) {
             if (outfit.remeras == remeras[i].idRemeras) {
@@ -62,6 +77,21 @@ export default function Game() {
         console.log(newRemera)
         setRemeraSeleccionada(newRemera);
         console.log(remeraSeleccionada)
+    }
+
+    function idsPantalones(id) {
+        outfit.pantalones = id
+        console.log(outfit);
+        let newPantalon = "";
+        console.log(outfit.pantalones)
+        for (let i = 0; i < pantalon.length; i++) {
+            if (outfit.pantalones == pantalon[i].idpantalones) {
+                newPantalon = pantalon[i].link
+            }
+        }
+        console.log(newPantalon)
+        setRemeraSeleccionada(newPantalon);
+        console.log(pantalonSeleccionada)
     }
 
     return (
@@ -99,11 +129,16 @@ export default function Game() {
                                 </div>
                                 <div className={styles.MuestraOutfit}>
                                     <div className={styles.MuestraPersonaje} style={{ padding: '10px'}}>
-                                        <img src="/personajes/nano.png" alt="Avatar" style={{ width: '65%' }} />
+                                        <img src="/personajes/nano.png" alt="Avatar" style={{ width: '80%' }} />
                                     </div>
-                                    <div id="remera" className={styles.MuestraRemera}>
+                                    <div id="remera" className={styles.MuestraRemera} style={{ padding: '10px'}}>
                                         {remeraSeleccionada && (
-                                            <img src={remeraSeleccionada} style={{ width: '65%' }} alt="Remera Seleccionada" />
+                                            <img src={remeraSeleccionada} style={{ width: '80%' }} alt="Remera Seleccionada" />
+                                        )}
+                                    </div>
+                                    <div id="remera" className={styles.MuestraPantalon} style={{ padding: '10px'}}>
+                                        {pantalonSeleccionada && (
+                                            <img src={pantalonSeleccionada} style={{ width: '80%' }} alt="Remera Seleccionada" />
                                         )}
                                     </div>
                                 </div>
@@ -133,11 +168,20 @@ export default function Game() {
                                 </div>
 
                                 <div className={styles.ropa}>
-                                    <div className={styles.MuestraRopa}>
+                                    <div style={{display: ''}}>
                                         {
                                             remeras.map((remera, index) => (
-                                                <button key={index} id={remera.idRemeras} onClick={() => ids(remera.idRemeras)}>
+                                                <button key={index} id={remera.idRemeras} onClick={() => idsRemeras(remera.idRemeras)}>
                                                     <img src={remera.link} style={{ width: '84.375px', height: '150px' }} alt={`Remera ${index}`} />
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                    <div style={{display: ''}}>
+                                        {
+                                            pantalon.map((pantalon, index) => (
+                                                <button key={index} id={pantalon.idpantalones} onClick={() => idsPantalones(pantalon.idpantalones)}>
+                                                    <img src={pantalon.link} style={{ width: '84.375px', height: '150px' }} alt={`Remera ${index}`} />
                                                 </button>
                                             ))
                                         }

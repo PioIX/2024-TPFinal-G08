@@ -86,6 +86,14 @@
   z-index: 1; 
 }
 
+.MuestraPantalon{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2; 
+}
+
+
 
 .MuestraOutfit {
   justify-content: space-around;
