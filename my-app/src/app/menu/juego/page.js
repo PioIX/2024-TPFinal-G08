@@ -11,26 +11,42 @@ import styles from '@/components/page.module.css';
 import Head from 'next/head';
 
 export default function Game() {
-    const [selectedCategory, setSelectedCategory] = useState('tops');
+    const [selectedCategory, setSelectedCategory] = useState('remeras');
     const categories = [
-        { name: 'tops', img: '4.png' },
-        { name: 'bottoms', img: '6.png' },
-        { name: 'shoes', img: '7.png' },
-        { name: 'accessories', img: '8.png' },
-        { name: 'people', img: '5.png' },
-        { name: 'pets', img: '9.png' },
-        { name: 'backgrounds', img: '10.png' },
+        { name: 'remeras', img: '4.png' },
+        { name: 'pantalones', img: '6.png' },
+        { name: 'zapatos', img: '7.png' },
+        { name: 'accesorios', img: '8.png' },
+        { name: 'personajes', img: '5.png' },
+        { name: 'mascotas', img: '9.png' },
+        { name: 'fondos', img: '10.png' },
     ];
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
+        let cambiar = ""
+        if (category == "remeras") {
+            setdisplayRemeras(cambiar)
+            console.log("funciona")
+            console.log(displayRemeras)
+        }
+        else if (category == "pantalones") {
+            setdisplayPantalon(cambiar)
+            console.log("funciona 2")
+            console.log(displayPantalon)
+        }
     };
+
+    const [displayRemeras, setdisplayRemeras] = useState("none");
+    const [displayPantalon, setdisplayPantalon] = useState("none");
 
     const [remeras, setRemeras] = useState([]);
     const [remeraSeleccionada, setRemeraSeleccionada] = useState("");
 
     const [pantalon, setPantalones] = useState([]);
     const [pantalonSeleccionada, setPantalonSeleccionada] = useState("");
+
+
 
     async function obtenerRemeras() {
         let res = await getRemeras();
@@ -64,6 +80,15 @@ export default function Game() {
         personaje: 1
     }
 
+    function display() {
+        if (categories == "remeras") {
+            setdisplayRemeras(true)
+        }
+        if (categories == "pantalones") {
+            setdisplayPantalon(true)
+        }
+    }
+
     function idsRemeras(id) {
         outfit.remeras = id
         console.log(outfit);
@@ -90,7 +115,7 @@ export default function Game() {
             }
         }
         console.log(newPantalon)
-        setRemeraSeleccionada(newPantalon);
+        setPantalonSeleccionada(newPantalon);
         console.log(pantalonSeleccionada)
     }
 
@@ -128,15 +153,15 @@ export default function Game() {
                                     Usuario
                                 </div>
                                 <div className={styles.MuestraOutfit}>
-                                    <div className={styles.MuestraPersonaje} style={{ padding: '10px'}}>
+                                    <div className={styles.MuestraPersonaje} style={{ padding: '10px' }}>
                                         <img src="/personajes/nano.png" alt="Avatar" style={{ width: '80%' }} />
                                     </div>
-                                    <div id="remera" className={styles.MuestraRemera} style={{ padding: '10px'}}>
+                                    <div id="remera" className={styles.MuestraRemera} style={{ padding: '10px' }}>
                                         {remeraSeleccionada && (
                                             <img src={remeraSeleccionada} style={{ width: '80%' }} alt="Remera Seleccionada" />
                                         )}
                                     </div>
-                                    <div id="remera" className={styles.MuestraPantalon} style={{ padding: '10px'}}>
+                                    <div id="remera" className={styles.MuestraPantalon} style={{ padding: '10px' }}>
                                         {pantalonSeleccionada && (
                                             <img src={pantalonSeleccionada} style={{ width: '80%' }} alt="Remera Seleccionada" />
                                         )}
@@ -168,7 +193,7 @@ export default function Game() {
                                 </div>
 
                                 <div className={styles.ropa}>
-                                    <div style={{display: ''}}>
+                                    <div style={{ display: displayPantalon}}>
                                         {
                                             remeras.map((remera, index) => (
                                                 <button key={index} id={remera.idRemeras} onClick={() => idsRemeras(remera.idRemeras)}>
@@ -177,11 +202,11 @@ export default function Game() {
                                             ))
                                         }
                                     </div>
-                                    <div style={{display: ''}}>
+                                    <div style={{ display: displayPantalon}}>
                                         {
                                             pantalon.map((pantalon, index) => (
                                                 <button key={index} id={pantalon.idpantalones} onClick={() => idsPantalones(pantalon.idpantalones)}>
-                                                    <img src={pantalon.link} style={{ width: '84.375px', height: '150px' }} alt={`Remera ${index}`} />
+                                                    <img src={pantalon.link} style={{ width: '84.375px', height: '150px' }} alt={`Pantalón ${index}`} />
                                                 </button>
                                             ))
                                         }
