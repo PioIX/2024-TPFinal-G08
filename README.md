@@ -6,7 +6,8 @@ Cuando el jugador esté satisfecho con el outfit lo puede publicar a un muro en 
 Nos inspiramos en muchos juegos típicos para crear avatares (por ej: el vestidor de Mundo Gaturro es algo parecido a lo que queremos lograr).
  - Dato!: Pensamos dibujar las caras (pensadas en gente que conocemos) y digitalizar los dibujos.
 
-<image src="/ref.png" alt="Una muestra de lo que queremos lograr">
+![Lo que queremos lograr](/public/ref.png)
+
 
 ## Alcance 
 - Personajes
