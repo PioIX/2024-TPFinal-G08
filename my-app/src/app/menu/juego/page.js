@@ -27,13 +27,11 @@ export default function Game() {
         let cambiar = ""
         if (category == "remeras") {
             setdisplayRemeras(cambiar)
-            console.log("funciona")
-            console.log(displayRemeras)
+            setdisplayPantalon("none")
         }
         else if (category == "pantalones") {
             setdisplayPantalon(cambiar)
-            console.log("funciona 2")
-            console.log(displayPantalon)
+            setdisplayRemeras("none")
         }
     };
 
@@ -78,15 +76,6 @@ export default function Game() {
         remeras: 0,
         pantalones: 0,
         personaje: 1
-    }
-
-    function display() {
-        if (categories == "remeras") {
-            setdisplayRemeras(true)
-        }
-        if (categories == "pantalones") {
-            setdisplayPantalon(true)
-        }
     }
 
     function idsRemeras(id) {
@@ -154,16 +143,16 @@ export default function Game() {
                                 </div>
                                 <div className={styles.MuestraOutfit}>
                                     <div className={styles.MuestraPersonaje} style={{ padding: '10px' }}>
-                                        <img src="/personajes/nano.png" alt="Avatar" style={{ width: '80%' }} />
+                                        <img src="/personajes/nano.png" alt="Avatar" style={{ width: '90%' }} />
                                     </div>
                                     <div id="remera" className={styles.MuestraRemera} style={{ padding: '10px' }}>
                                         {remeraSeleccionada && (
-                                            <img src={remeraSeleccionada} style={{ width: '80%' }} alt="Remera Seleccionada" />
+                                            <img src={remeraSeleccionada} style={{ width: '90%' }} alt="Remera Seleccionada" />
                                         )}
                                     </div>
                                     <div id="remera" className={styles.MuestraPantalon} style={{ padding: '10px' }}>
                                         {pantalonSeleccionada && (
-                                            <img src={pantalonSeleccionada} style={{ width: '80%' }} alt="Remera Seleccionada" />
+                                            <img src={pantalonSeleccionada} style={{ width: '90%' }} alt="Remera Seleccionada" />
                                         )}
                                     </div>
                                 </div>
@@ -193,7 +182,7 @@ export default function Game() {
                                 </div>
 
                                 <div className={styles.ropa}>
-                                    <div style={{ display: displayPantalon}}>
+                                    <div style={{ display: displayRemeras}}>
                                         {
                                             remeras.map((remera, index) => (
                                                 <button key={index} id={remera.idRemeras} onClick={() => idsRemeras(remera.idRemeras)}>
