@@ -68,6 +68,7 @@ export async function getCalzados() {
     //Tengo que usar el await porque la respuesta del servidor es lenta
     const result = await response.json()
     console.log(result)
+    return result
 }
 
 //TRAE ACCESORIOS

@@ -5,7 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
-import { getRemeras, getPantalones } from '@/app/utils/api.js';
+import { getRemeras, getPantalones, getCalzados} from '@/app/utils/api.js';
 import React, { useEffect, useState } from 'react';
 import styles from '@/components/page.module.css';
 import Head from 'next/head';
@@ -28,21 +28,32 @@ export default function Game() {
         if (category == "remeras") {
             setdisplayRemeras(cambiar)
             setdisplayPantalon("none")
+            setdisplayCalzado("none")
         }
         else if (category == "pantalones") {
             setdisplayPantalon(cambiar)
             setdisplayRemeras("none")
+            setdisplayCalzado("none")
+        }
+        else if (category == "zapatos") {
+            setdisplayPantalon("none")
+            setdisplayRemeras("none")
+            setdisplayCalzado(cambiar)
         }
     };
 
     const [displayRemeras, setdisplayRemeras] = useState("none");
     const [displayPantalon, setdisplayPantalon] = useState("none");
+    const [displayCalzado, setdisplayCalzado] = useState("none");
 
     const [remeras, setRemeras] = useState([]);
     const [remeraSeleccionada, setRemeraSeleccionada] = useState("");
 
     const [pantalon, setPantalones] = useState([]);
     const [pantalonSeleccionada, setPantalonSeleccionada] = useState("");
+
+    const [calzado, setCalzado] = useState([]);
+    const [calzadoSeleccionado, setCalzadoSeleccionado] = useState("");
 
 
 
@@ -56,6 +67,11 @@ export default function Game() {
         setPantalones(res);
     }
 
+    async function obtenerCalzado() {
+        let res = await getCalzados();
+        setCalzado(res);
+    }
+
     useEffect(() => {
         obtenerRemeras();
     }, []);
@@ -65,6 +81,11 @@ export default function Game() {
     }, []);
 
     useEffect(() => {
+        obtenerCalzado();
+    }, []);
+
+
+    useEffect(() => {
         console.log(remeras);
     }, [remeras]);
 
@@ -72,9 +93,14 @@ export default function Game() {
         console.log(pantalon);
     }, [pantalon]);
 
+    useEffect(() => {
+        console.log(calzado);
+    }, [calzado]);
+
     let outfit = {
         remeras: 0,
         pantalones: 0,
+        calzado: 0, 
         personaje: 1
     }
 
@@ -106,6 +132,21 @@ export default function Game() {
         console.log(newPantalon)
         setPantalonSeleccionada(newPantalon);
         console.log(pantalonSeleccionada)
+    }
+
+    function idsCalzados(id) {
+        outfit.calzado = id
+        console.log(outfit);
+        let newCalzado = "";
+        console.log(outfit.calzado)
+        for (let i = 0; i < calzado.length; i++) {
+            if (outfit.calzado == calzado[i].idClazado) {
+                newCalzado = calzado[i].link
+            }
+        }
+        console.log(newCalzado)
+        setCalzadoSeleccionado(newCalzado);
+        console.log(calzadoSeleccionado)
     }
 
     return (
@@ -150,9 +191,14 @@ export default function Game() {
                                             <img src={remeraSeleccionada} style={{ width: '90%' }} alt="Remera Seleccionada" />
                                         )}
                                     </div>
-                                    <div id="remera" className={styles.MuestraPantalon} style={{ padding: '10px' }}>
+                                    <div id="pantalon" className={styles.MuestraPantalon} style={{ padding: '10px' }}>
                                         {pantalonSeleccionada && (
-                                            <img src={pantalonSeleccionada} style={{ width: '90%' }} alt="Remera Seleccionada" />
+                                            <img src={pantalonSeleccionada} style={{ width: '90%' }} alt="Pantalon Seleccionada" />
+                                        )}
+                                    </div>
+                                    <div id="calzado" className={styles.MuestraCalzado} style={{ padding: '10px' }}>
+                                        {calzadoSeleccionado && (
+                                            <img src={calzadoSeleccionado} style={{ width: '90%' }} alt="Calzado Seleccionada" />
                                         )}
                                     </div>
                                 </div>
@@ -196,6 +242,15 @@ export default function Game() {
                                             pantalon.map((pantalon, index) => (
                                                 <button key={index} id={pantalon.idpantalones} onClick={() => idsPantalones(pantalon.idpantalones)}>
                                                     <img src={pantalon.link} style={{ width: '84.375px', height: '150px' }} alt={`Pantalón ${index}`} />
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                    <div style={{ display: displayCalzado}}>
+                                        {
+                                            calzado.map((calzado, index) => (
+                                                <button key={index} id={calzado.idClazado} onClick={() => idsCalzados(calzado.idClazado)}>
+                                                    <img src={calzado.link} style={{ width: '84.375px', height: '150px' }} alt={`Clazado ${index}`} />
                                                 </button>
                                             ))
                                         }
