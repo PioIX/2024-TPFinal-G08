@@ -298,3 +298,14 @@ app.get('/getOutfits', async (req, res) => {
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
+
+
+app.update('/updatePuntajeOutfits', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("Update Outfits set puntaje ");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
