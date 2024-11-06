@@ -5,7 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
-import { getRemeras, getPantalones, getCalzados} from '@/app/utils/api.js';
+import { getRemeras, getPantalones, getCalzados, getPersonajes } from '@/app/utils/api.js';
 import React, { useEffect, useState } from 'react';
 import styles from '@/components/page.module.css';
 import Head from 'next/head';
@@ -29,22 +29,32 @@ export default function Game() {
             setdisplayRemeras(cambiar)
             setdisplayPantalon("none")
             setdisplayCalzado("none")
+            setdisplayPersonajes("none")
         }
         else if (category == "pantalones") {
-            setdisplayPantalon(cambiar)
             setdisplayRemeras("none")
+            setdisplayPantalon(cambiar)
             setdisplayCalzado("none")
+            setdisplayPersonajes("none")
         }
         else if (category == "zapatos") {
-            setdisplayPantalon("none")
             setdisplayRemeras("none")
+            setdisplayPantalon("none")
             setdisplayCalzado(cambiar)
+            setdisplayPersonajes("none")
+        }
+        else if (category == "personajes"){
+            setdisplayRemeras("none")
+            setdisplayPantalon("none")
+            setdisplayCalzado("none")
+            setdisplayPersonajes(cambiar)
         }
     };
 
     const [displayRemeras, setdisplayRemeras] = useState("none");
     const [displayPantalon, setdisplayPantalon] = useState("none");
     const [displayCalzado, setdisplayCalzado] = useState("none");
+    const [displayPersonajes, setdisplayPersonajes] = useState("none");
 
     const [remeras, setRemeras] = useState([]);
     const [remeraSeleccionada, setRemeraSeleccionada] = useState("");
@@ -54,6 +64,9 @@ export default function Game() {
 
     const [calzado, setCalzado] = useState([]);
     const [calzadoSeleccionado, setCalzadoSeleccionado] = useState("");
+
+    const [personaje, setPersonaje] = useState([]);
+    const [personajeSeleccionado, setPersonajeSeleccionado] = useState("");
 
 
 
@@ -72,6 +85,11 @@ export default function Game() {
         setCalzado(res);
     }
 
+    async function obtenerPersonajes() {
+        let res = await getPersonajes();
+        setPersonaje(res);
+    }
+
     useEffect(() => {
         obtenerRemeras();
     }, []);
@@ -82,6 +100,10 @@ export default function Game() {
 
     useEffect(() => {
         obtenerCalzado();
+    }, []);
+
+    useEffect(() => {
+        obtenerPersonajes();
     }, []);
 
 
@@ -100,8 +122,24 @@ export default function Game() {
     let outfit = {
         remeras: 0,
         pantalones: 0,
-        calzado: 0, 
-        personaje: 1
+        calzado: 0,
+        personaje: 0
+    }
+
+
+    function idsPersonajes(id) {
+        outfit.personaje = id
+        console.log(outfit);
+        let newPersonaje = "";
+        console.log(outfit.personaje)
+        for (let i = 0; i < personaje.length; i++) {
+            if (outfit.personaje == personaje[i].idPersonajes) {
+                newPersonaje = personaje[i].link
+            }
+        }
+        console.log(newPersonaje)
+        setPersonajeSeleccionado(newPersonaje);
+        console.log(personajeSeleccionado)
     }
 
     function idsRemeras(id) {
@@ -184,7 +222,9 @@ export default function Game() {
                                 </div>
                                 <div className={styles.MuestraOutfit}>
                                     <div className={styles.MuestraPersonaje} style={{ padding: '10px' }}>
-                                        <img src="/personajes/nano.png" alt="Avatar" style={{ width: '90%' }} />
+                                        {personajeSeleccionado && (
+                                            <img src={personajeSeleccionado} alt="Avatar" style={{ width: '90%' }} />
+                                        )}
                                     </div>
                                     <div id="remera" className={styles.MuestraRemera} style={{ padding: '10px' }}>
                                         {remeraSeleccionada && (
@@ -228,7 +268,7 @@ export default function Game() {
                                 </div>
 
                                 <div className={styles.ropa}>
-                                    <div style={{ display: displayRemeras}}>
+                                    <div style={{ display: displayRemeras }}>
                                         {
                                             remeras.map((remera, index) => (
                                                 <button key={index} id={remera.idRemeras} onClick={() => idsRemeras(remera.idRemeras)}>
@@ -237,7 +277,7 @@ export default function Game() {
                                             ))
                                         }
                                     </div>
-                                    <div style={{ display: displayPantalon}}>
+                                    <div style={{ display: displayPantalon }}>
                                         {
                                             pantalon.map((pantalon, index) => (
                                                 <button key={index} id={pantalon.idpantalones} onClick={() => idsPantalones(pantalon.idpantalones)}>
@@ -246,11 +286,20 @@ export default function Game() {
                                             ))
                                         }
                                     </div>
-                                    <div style={{ display: displayCalzado}}>
+                                    <div style={{ display: displayCalzado }}>
                                         {
                                             calzado.map((calzado, index) => (
                                                 <button key={index} id={calzado.idClazado} onClick={() => idsCalzados(calzado.idClazado)}>
                                                     <img src={calzado.link} style={{ width: '84.375px', height: '150px' }} alt={`Clazado ${index}`} />
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                    <div style={{ display: displayPersonajes }}>
+                                        {
+                                            personaje.map((personaje, index) => (
+                                                <button key={index} id={personaje.idPersonajes} onClick={() => idsPersonajes(personaje.idPersonajes)}>
+                                                    <img src={personaje.link} style={{ width: '84.375px', height: '150px' }} alt={`Personaje ${index}`} />
                                                 </button>
                                             ))
                                         }
