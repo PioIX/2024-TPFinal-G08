@@ -87,6 +87,7 @@ export async function getAccesorios() {
     //Tengo que usar el await porque la respuesta del servidor es lenta
     const result = await response.json()
     console.log(result)
+    return result
 }
 
 //TRAE MASCOTAS
@@ -104,6 +105,7 @@ export async function getMascotas() {
     //Tengo que usar el await porque la respuesta del servidor es lenta
     const result = await response.json()
     console.log(result)
+    return result
 }
 
 //TRAE OUTFITS
@@ -121,4 +123,40 @@ export async function getOutfits() {
     //Tengo que usar el await porque la respuesta del servidor es lenta
     const result = await response.json()
     console.log(result)
+    return result
+}
+
+export async function getFondos() {
+    //Llamo a un pedido Get del servidor
+    const response = await fetch('http://localhost:4000/getFondos',{
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+          },
+    })
+
+    console.log(response)
+    //Tengo que usar el await porque la respuesta del servidor es lenta
+    const result = await response.json()
+    console.log(result)
+    return result
+}
+
+export async function postOutfits(outfitData) {
+    // outfitData es el objeto que contiene los datos que necesitas enviar
+    const response = await fetch('http://localhost:4000/outfit', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", // Especificamos que estamos enviando JSON
+        },
+        body: JSON.stringify(outfitData) // Convertimos el objeto outfitData a JSON
+    });
+
+    // Esperamos la respuesta del servidor
+    const result = await response.json();
+
+    // Mostramos el resultado
+    console.log(result);
+
+    return result;
 }

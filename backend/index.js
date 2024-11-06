@@ -298,3 +298,32 @@ app.get('/getOutfits', async (req, res) => {
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
+
+app.get('/getFondos', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Fondos");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.post('/outfit', async (req, res) => {
+    console.log("Datos de registro recibidos: ", req.body);
+    const { remeras, pantalones, calzado, accesorio, mascota, fondo, personaje } = req.body;
+
+    try {
+        const sql = `INSERT INTO Outfits (personaje, remera, pantalon, accesorio, calzado, mascota, fondo) VALUES ('${personaje}', '${remeras}', '${pantalones}', '${accesorio}', '${calzado}', '${mascota}', '${fondo}')`;
+        const resultado = await MySQL.realizarQuery(sql);
+
+        if (resultado.affectedRows > 0) {
+            res.status(201).json({ message: "Outfit registrado exitosamente." });
+        } else {
+            res.status(500).json({ error: "Error al registrar outfit." });
+        }
+    } catch (error) {
+        console.error("Error en registro: ", error);
+        res.status(500).json({ error: "Error interno del servidor." });
+    }
+});

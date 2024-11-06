@@ -5,7 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
-import { getRemeras, getPantalones, getCalzados, getPersonajes } from '@/app/utils/api.js';
+import { getRemeras, getPantalones, getCalzados, getPersonajes, getAccesorios, getMascotas, getFondos, postOutfits } from '@/app/utils/api.js';
 import React, { useEffect, useState } from 'react';
 import styles from '@/components/page.module.css';
 import Head from 'next/head';
@@ -30,24 +30,63 @@ export default function Game() {
             setdisplayPantalon("none")
             setdisplayCalzado("none")
             setdisplayPersonajes("none")
+            setdisplayAccesorios("none")
+            setdisplayMascotas("none")
+            setdisplayFondos("none")
         }
         else if (category == "pantalones") {
             setdisplayRemeras("none")
             setdisplayPantalon(cambiar)
             setdisplayCalzado("none")
             setdisplayPersonajes("none")
+            setdisplayAccesorios("none")
+            setdisplayMascotas("none")
+            setdisplayFondos("none")
         }
         else if (category == "zapatos") {
             setdisplayRemeras("none")
             setdisplayPantalon("none")
             setdisplayCalzado(cambiar)
             setdisplayPersonajes("none")
+            setdisplayAccesorios("none")
+            setdisplayMascotas("none")
+            setdisplayFondos("none")
         }
         else if (category == "personajes"){
             setdisplayRemeras("none")
             setdisplayPantalon("none")
             setdisplayCalzado("none")
             setdisplayPersonajes(cambiar)
+            setdisplayAccesorios("none")
+            setdisplayMascotas("none")
+            setdisplayFondos("none")
+        }
+        else if (category == "accesorios"){
+            setdisplayRemeras("none")
+            setdisplayPantalon("none")
+            setdisplayCalzado("none")
+            setdisplayPersonajes("none")
+            setdisplayAccesorios(cambiar)
+            setdisplayMascotas("none")
+            setdisplayFondos("none")
+        }
+        else if (category == "mascotas"){
+            setdisplayRemeras("none")
+            setdisplayPantalon("none")
+            setdisplayCalzado("none")
+            setdisplayPersonajes("none")
+            setdisplayAccesorios("none")
+            setdisplayMascotas(cambiar)
+            setdisplayFondos("none")
+        }
+        else if (category == "fondos"){
+            setdisplayRemeras("none")
+            setdisplayPantalon("none")
+            setdisplayCalzado("none")
+            setdisplayPersonajes("none")
+            setdisplayAccesorios("none")
+            setdisplayMascotas("none")
+            setdisplayFondos(cambiar)
         }
     };
 
@@ -55,6 +94,9 @@ export default function Game() {
     const [displayPantalon, setdisplayPantalon] = useState("none");
     const [displayCalzado, setdisplayCalzado] = useState("none");
     const [displayPersonajes, setdisplayPersonajes] = useState("none");
+    const [displayAccesorios, setdisplayAccesorios] = useState("none");
+    const [displayMascotas, setdisplayMascotas] = useState("none");
+    const [displayFondos, setdisplayFondos] = useState("none");
 
     const [remeras, setRemeras] = useState([]);
     const [remeraSeleccionada, setRemeraSeleccionada] = useState("");
@@ -67,6 +109,15 @@ export default function Game() {
 
     const [personaje, setPersonaje] = useState([]);
     const [personajeSeleccionado, setPersonajeSeleccionado] = useState("");
+
+    const [accesorio, setAccesorio] = useState([]);
+    const [accesorioSeleccionado, setAccesorioSeleccionado] = useState("");
+
+    const [mascota, setMascota] = useState([]);
+    const [mascotaSeleccionada, setMascotaSeleccionada] = useState("");
+
+    const [fondo, setFondo] = useState([]);
+    const [fondoSeleccionado, setFondoSeleccionado] = useState("");
 
 
 
@@ -90,6 +141,21 @@ export default function Game() {
         setPersonaje(res);
     }
 
+    async function obtenerAccesorios() {
+        let res = await getAccesorios();
+        setAccesorio(res);
+    }
+
+    async function obtenerMascota() {
+        let res = await getMascotas();
+        setMascota(res);
+    }
+
+    async function obtenerFondos() {
+        let res = await getFondos();
+        setFondo(res);
+    }
+
     useEffect(() => {
         obtenerRemeras();
     }, []);
@@ -105,6 +171,19 @@ export default function Game() {
     useEffect(() => {
         obtenerPersonajes();
     }, []);
+
+    useEffect(() => {
+        obtenerAccesorios();
+    }, []);
+
+    useEffect(() => {
+        obtenerMascota();
+    }, []);
+
+    useEffect(() => {
+        obtenerFondos();
+    }, []);
+
 
 
     useEffect(() => {
@@ -123,6 +202,9 @@ export default function Game() {
         remeras: 0,
         pantalones: 0,
         calzado: 0,
+        accesorio: 0,
+        mascota: 0,
+        fondo: 0,
         personaje: 0
     }
 
@@ -187,6 +269,40 @@ export default function Game() {
         console.log(calzadoSeleccionado)
     }
 
+    function idsAccesorios(id) {
+        outfit.accesorio = id
+        let newAccesorio = "";
+        for (let i = 0; i < accesorio.length; i++) {
+            if (outfit.accesorio == accesorio[i].idAccesorio) {
+                newAccesorio = accesorio[i].link
+            }
+        }
+        setAccesorioSeleccionado(newAccesorio);
+    }
+
+    function idsMascota(id) {
+        outfit.mascota = id
+        let newMascota = "";
+        for (let i = 0; i < mascota.length; i++) {
+            if (outfit.mascota == mascota[i].idMascota) {
+                newMascota = mascota[i].link
+            }
+        }
+        setMascotaSeleccionada(newMascota);
+    }
+
+    function idsFondo(id) {
+        outfit.fondo = id
+        let newFondo = "";
+        for (let i = 0; i < fondo.length; i++) {
+            if (outfit.fondo == fondo[i].idFondo) {
+                newFondo = fondo[i].link
+            }
+        }
+        setFondoSeleccionado(newFondo);
+    }
+
+
     return (
         <>
             <Head>
@@ -239,6 +355,21 @@ export default function Game() {
                                     <div id="calzado" className={styles.MuestraCalzado} style={{ padding: '10px' }}>
                                         {calzadoSeleccionado && (
                                             <img src={calzadoSeleccionado} style={{ width: '90%' }} alt="Calzado Seleccionada" />
+                                        )}
+                                    </div>
+                                    <div id="Accesorio" className={styles.MuestraAccesorio} style={{ padding: '10px' }}>
+                                        {accesorioSeleccionado && (
+                                            <img src={accesorioSeleccionado} style={{ width: '90%' }} alt="Accesorio Seleccionada" />
+                                        )}
+                                    </div>
+                                    <div id="Mascota" className={styles.MuestraMascota} style={{ padding: '10px' }}>
+                                        {mascotaSeleccionada && (
+                                            <img src={mascotaSeleccionada} style={{ width: '90%' }} alt="Mascota Seleccionada" />
+                                        )}
+                                    </div>
+                                    <div id="Fondo" className={styles.MuestraFondo} style={{ padding: '10px' }}>
+                                        {fondoSeleccionado && (
+                                            <img src={fondoSeleccionado} style={{ width: '90%' }} alt="Fondo Seleccionada" />
                                         )}
                                     </div>
                                 </div>
@@ -304,6 +435,33 @@ export default function Game() {
                                             ))
                                         }
                                     </div>
+                                    <div style={{ display: displayAccesorios }}>
+                                        {
+                                            accesorio.map((accesorio, index) => (
+                                                <button key={index} id={accesorio.idAccesorio} onClick={() => idsAccesorios(accesorio.idAccesorio)}>
+                                                    <img src={accesorio.link} style={{ width: '84.375px', height: '150px' }} alt={`Accesorio ${index}`} />
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                    <div style={{ display: displayMascotas }}>
+                                        {
+                                            mascota.map((mascota, index) => (
+                                                <button key={index} id={mascota.idMascota} onClick={() => idsMascota(mascota.idMascota)}>
+                                                    <img src={mascota.link} style={{ width: '84.375px', height: '150px' }} alt={`Mascota ${index}`} />
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                    <div style={{ display: displayFondos }}>
+                                        {
+                                            fondo.map((fondo, index) => (
+                                                <button key={index} id={fondo.idFondo} onClick={() => idsFondo(fondo.idFondo)}>
+                                                    <img src={fondo.link} style={{ width: '84.375px', height: '150px' }} alt={`Fondo ${index}`} />
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
                                 </div>
 
                             </div>
@@ -312,7 +470,7 @@ export default function Game() {
 
                     {/* Botones de acción debajo del div del avatar */}
                     <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
-                        <button style={{
+                        <button onClick={console.log("boton")} style={{
                             padding: '10px 20px',
                             border: 'none',
                             backgroundColor: '#bf97a0',

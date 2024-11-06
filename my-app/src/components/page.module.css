@@ -77,28 +77,49 @@
 
 .MuestraPersonaje {
   position: relative; 
-  z-index: 0;
+  z-index: 1;
 }
 
 .MuestraRemera {
   position: absolute; 
   top: 0; 
   left: 0; 
-  z-index: 1; 
+  z-index: 2; 
 }
 
 .MuestraPantalon{
   position: absolute; 
   top: 0; 
   left: 0; 
-  z-index: 1; 
+  z-index: 2; 
 }
 
 .MuestraCalzado{
   position: absolute; 
   top: 0; 
   left: 0; 
-  z-index: 1;
+  z-index: 2;
+}
+
+.MuestraAccesorio{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2;
+}
+
+.MuestraMascota{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2;
+}
+
+.MuestraFondo{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 0;
 }
 
 
