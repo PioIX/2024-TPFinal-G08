@@ -8,25 +8,29 @@ import Hamburguesa from '@/components/Hamburguesa';
 import { useState } from 'react';
 
 export default function Votacion() {
-  // State to track scores and vote count for each player
-  const [puntajes, setPuntajes] = useState<number[]>(Array(5).fill(0));
-  const [cantidaddevotos, setCantidaddevotos] = useState<number[]>(Array(5).fill(0));
+  // Single float score and vote count
+  const [puntaje, setPuntaje] = useState(0.0);
+  const [cantidaddevotos, setCantidaddevotos] = useState(0);
 
-  // Function to update score based on button value
-  const handleVote = (index: number, score: number) => {
-    const updatedPuntajes = [...puntajes];
-    updatedPuntajes[index] += score;
+  // Updates score based on button value
+  const handleVote = (score) => {
+    const updatedPuntaje = puntaje + score;
+    const updatedVotos = cantidaddevotos + 1;
 
-    const updatedVotos = [...cantidaddevotos];
-    updatedVotos[index] += 1;
-
-    setPuntajes(updatedPuntajes);
+    setPuntaje(updatedPuntaje);
     setCantidaddevotos(updatedVotos);
 
-    // Optionally, save score to the server
-    // saveScoreToServer(index, updatedPuntajes[index]);
+    // Send the updated score to the backend
+    fetch('http://localhost:4000/putOutfitScores', {  // Specify the correct port if it's not 3000
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: 1, puntaje: updatedPuntaje }) // Replace `id: 1` with the correct outfit ID
+  })
+    .then(response => response.json())
+    .then(data => console.log("Score updated:", data))
+    .catch(error => console.error("Error updating score:", error));
   };
-
+  
   return (
     <>       
       <Header />
@@ -75,7 +79,7 @@ export default function Votacion() {
                       <img src="/personajes/nano.png" style={{ width: '168.75px', height: '300px' }} alt="Jugador" />
                     </div>
 
-                    <h5 style={{ color: '#bf97a0' }}>Puntaje: {puntajes[index]}</h5>
+                    <h5 style={{ color: '#bf97a0' }}>Puntaje: {puntaje[index]}</h5>
                     <h6 style={{ color: '#bf97a0' }}>Votos: {cantidaddevotos[index]}</h6>
 
                     <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px' }}>
@@ -83,7 +87,7 @@ export default function Votacion() {
                         <button
                           key={score}
                           className="btn btn-success"
-                          onClick={() => handleVote(index, score)}
+                          onClick={() => handleVote(score)}
                           style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}
                         >
                           {score}

@@ -300,12 +300,40 @@ app.get('/getOutfits', async (req, res) => {
 });
 
 
-app.update('/updatePuntajeOutfits', async (req, res) => {
-    try {
-        const respuesta = await MySQL.realizarQuery("Update Outfits set puntaje ");
-        res.send(respuesta);
-    } catch (error) {
-        console.error("Error en ContraseñaGet: ", error);
-        res.status(500).send({ error: 'Error interno del servidor' });
+
+// Update scores in the Outfits table based on `updatedPuntaje` from the frontend
+app.put('/putOutfitScores', async (req, res) => {
+    const { updatedPuntaje } = req.body; // Array of scores with format [{ id: 1, puntaje: 100 }, ...]
+  
+    if (!updatedPuntaje || !Array.isArray(updatedPuntaje)) {
+      return res.status(400).json({ error: "Invalid data format" });
     }
-});
+  
+    try {
+      for (const { id, puntaje } of updatedPuntaje) {
+        const sql = `UPDATE Outfits SET puntaje = ? WHERE ID_Outfit = ?`;
+        await MySQL.realizarQuery(sql, [puntaje, id]);
+      }
+      res.status(200).json({ message: "Outfit scores updated successfully" });
+    } catch (error) {
+      console.error("Error updating outfit scores:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  /**app.post('/putOutfitScores', async (req, res) => {
+  const { id, puntaje } = req.body;
+
+  if (typeof id !== 'number' || typeof puntaje !== 'number') {
+    return res.status(400).json({ error: "Invalid data format" });
+  }
+
+  try {
+    const sql = `UPDATE Outfits SET puntaje = ? WHERE ID_Outfit = ?`;
+    await MySQL.realizarQuery(sql, [puntaje, id]);
+    res.status(200).json({ message: "Outfit score updated successfully" });
+  } catch (error) {
+    console.error("Error updating outfit score:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}); */
