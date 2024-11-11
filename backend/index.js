@@ -314,10 +314,13 @@ app.post('/outfit', async (req, res) => {
     const { remeras, pantalones, calzado, accesorio, mascota, fondo, personaje } = req.body;
 
     try {
-        const sql = `INSERT INTO Outfits (personaje, remera, pantalon, accesorio, calzado, mascota, fondo) VALUES ('${personaje}', '${remeras}', '${pantalones}', '${accesorio}', '${calzado}', '${mascota}', '${fondo}')`;
-        const resultado = await MySQL.realizarQuery(sql);
+        // Usamos placeholders (?) para los valores, que son sustituidos por los valores en el arreglo siguiente
+        const sql = `INSERT INTO Outfits (personaje, remera, pantalon, accesorio, calzado, mascota, fondo) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-        if (resultado.affectedRows > 0) {
+        const resultado = await connection.promise().execute(sql, [personaje, remeras, pantalones, accesorio, calzado, mascota, fondo]);
+
+        if (resultado[0].affectedRows > 0) {
             res.status(201).json({ message: "Outfit registrado exitosamente." });
         } else {
             res.status(500).json({ error: "Error al registrar outfit." });
@@ -327,3 +330,4 @@ app.post('/outfit', async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor." });
     }
 });
+

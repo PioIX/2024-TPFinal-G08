@@ -198,7 +198,7 @@ export default function Game() {
         console.log(calzado);
     }, [calzado]);
 
-    let outfit = {
+    const [outfit, setOutfit] = useState({
         remeras: 0,
         pantalones: 0,
         calzado: 0,
@@ -206,101 +206,119 @@ export default function Game() {
         mascota: 0,
         fondo: 0,
         personaje: 0
-    }
+    });  
 
 
     function idsPersonajes(id) {
-        outfit.personaje = id
-        console.log(outfit);
+        setOutfit((prevOutfit) => ({
+          ...prevOutfit,
+          personaje: id 
+        }));
+      
         let newPersonaje = "";
-        console.log(outfit.personaje)
         for (let i = 0; i < personaje.length; i++) {
-            if (outfit.personaje == personaje[i].idPersonajes) {
-                newPersonaje = personaje[i].link
-            }
+          if (id === personaje[i].idPersonajes) {
+            newPersonaje = personaje[i].link;
+          }
         }
-        console.log(newPersonaje)
+        console.log(newPersonaje);
         setPersonajeSeleccionado(newPersonaje);
-        console.log(personajeSeleccionado)
-    }
+      }
 
     function idsRemeras(id) {
-        outfit.remeras = id
-        console.log(outfit);
+        setOutfit((prevOutfit) => ({
+          ...prevOutfit,
+          remeras: id             
+        }));
+
         let newRemera = "";
-        console.log(outfit.remeras)
         for (let i = 0; i < remeras.length; i++) {
-            if (outfit.remeras == remeras[i].idRemeras) {
-                newRemera = remeras[i].link
-            }
+          if (id === remeras[i].idRemeras) {
+            newRemera = remeras[i].link;
+          }
         }
-        console.log(newRemera)
         setRemeraSeleccionada(newRemera);
-        console.log(remeraSeleccionada)
     }
+      
 
     function idsPantalones(id) {
-        outfit.pantalones = id
-        console.log(outfit);
+        setOutfit((prevOutfit) => ({
+          ...prevOutfit,
+          pantalones: id
+        }));
+    
         let newPantalon = "";
-        console.log(outfit.pantalones)
         for (let i = 0; i < pantalon.length; i++) {
-            if (outfit.pantalones == pantalon[i].idpantalones) {
-                newPantalon = pantalon[i].link
-            }
+          if (id === pantalon[i].idpantalones) {
+            newPantalon = pantalon[i].link;
+          }
         }
-        console.log(newPantalon)
+        console.log(newPantalon);
         setPantalonSeleccionada(newPantalon);
-        console.log(pantalonSeleccionada)
-    }
+      }
 
-    function idsCalzados(id) {
-        outfit.calzado = id
-        console.log(outfit);
+      function idsCalzados(id) {
+        setOutfit((prevOutfit) => ({
+          ...prevOutfit,
+          calzado: id
+        }));
+    
         let newCalzado = "";
-        console.log(outfit.calzado)
         for (let i = 0; i < calzado.length; i++) {
-            if (outfit.calzado == calzado[i].idClazado) {
-                newCalzado = calzado[i].link
-            }
+          if (id === calzado[i].idClazado) {
+            newCalzado = calzado[i].link;
+          }
         }
-        console.log(newCalzado)
-        setCalzadoSeleccionado(newCalzado);
-        console.log(calzadoSeleccionado)
-    }
+        setCalzadoSeleccionado(newCalzado)
+      }
 
-    function idsAccesorios(id) {
-        outfit.accesorio = id
+      function idsAccesorios(id) {
+        setOutfit((prevOutfit) => ({
+          ...prevOutfit,
+          accesorio: id 
+        }));
+      
         let newAccesorio = "";
         for (let i = 0; i < accesorio.length; i++) {
-            if (outfit.accesorio == accesorio[i].idAccesorio) {
-                newAccesorio = accesorio[i].link
-            }
+          if (id === accesorio[i].idAccesorio) {
+            newAccesorio = accesorio[i].link;
+          }
         }
-        setAccesorioSeleccionado(newAccesorio);
-    }
+        console.log(newAccesorio);
+        setAccesorioSeleccionado(newAccesorio)
+      }
 
-    function idsMascota(id) {
-        outfit.mascota = id
+      function idsMascota(id) {
+        setOutfit((prevOutfit) => ({
+          ...prevOutfit,
+          mascota: id
+        }));
+      
         let newMascota = "";
         for (let i = 0; i < mascota.length; i++) {
-            if (outfit.mascota == mascota[i].idMascota) {
-                newMascota = mascota[i].link
-            }
+          if (id === mascota[i].idMascota) {
+            newMascota = mascota[i].link;
+          }
         }
-        setMascotaSeleccionada(newMascota);
-    }
+        console.log(newMascota);
+        setMascotaSeleccionada(newMascota)
+      }
 
-    function idsFondo(id) {
-        outfit.fondo = id
+      function idsFondo(id) {
+        setOutfit((prevOutfit) => ({
+          ...prevOutfit,
+          fondo: id  
+        }));
+      
         let newFondo = "";
         for (let i = 0; i < fondo.length; i++) {
-            if (outfit.fondo == fondo[i].idFondo) {
-                newFondo = fondo[i].link
-            }
+          if (id === fondo[i].idFondo) {
+            newFondo = fondo[i].link;
+          }
         }
-        setFondoSeleccionado(newFondo);
-    }
+        console.log(newFondo);
+        setFondoSeleccionado(newFondo)
+      }
 
 
     return (
@@ -470,7 +488,7 @@ export default function Game() {
 
                     {/* Botones de acción debajo del div del avatar */}
                     <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
-                        <button onClick={console.log("boton")} style={{
+                        <button onClick={() => postOutfits(outfit)} style={{
                             padding: '10px 20px',
                             border: 'none',
                             backgroundColor: '#bf97a0',
