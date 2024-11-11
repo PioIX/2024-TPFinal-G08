@@ -269,3 +269,24 @@ app.get('/getOutfits', async (req, res) => {
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
+
+app.post('/updateOutfitScore', async (req, res) => {
+    const { idOutfit, nuevoPuntaje, nuevaCantidadVotos } = req.body;
+
+    if (!idOutfit || nuevoPuntaje === undefined || nuevaCantidadVotos === undefined) {
+        return res.status(400).json({ error: "Faltan datos para actualizar el puntaje" });
+    }
+    try {
+        const sql = `UPDATE Outfits SET puntaje = ?, cantidadVotos = ? WHERE idOutfit = ?`;
+        const resultado = await MySQL.realizarQuery(sql, [nuevoPuntaje, nuevaCantidadVotos, idOutfit]);
+
+        if (resultado.affectedRows > 0) {
+            res.status(200).json({ message: "Puntaje actualizado correctamente" });
+        } else {
+            res.status(404).json({ error: "Outfit no encontrado" });
+        }
+    } catch (error) {
+        console.error("Error en actualizar puntaje de outfit: ", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
