@@ -314,7 +314,6 @@ app.post('/outfit', async (req, res) => {
     const { remeras, pantalones, calzado, accesorio, mascota, fondo, personaje } = req.body;
 
     try {
-        // Usamos placeholders (?) para los valores, que son sustituidos por los valores en el arreglo siguiente
         const sql = `INSERT INTO Outfits (personaje, remera, pantalon, accesorio, calzado, mascota, fondo) 
                      VALUES (${personaje}, ${remeras}, ${pantalones}, ${accesorio}, ${calzado}, ${mascota}, ${fondo})`;
 

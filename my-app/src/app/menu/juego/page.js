@@ -419,7 +419,7 @@ export default function Game() {
                                 <div className={styles.ropa}>
                                     <div style={{ display: displayRemeras }}>
                                         {
-                                            remeras.map((remera, index) => (
+                                            remeras.filter(f => f.idRemeras !== 0).map((remera, index) => (
                                                 <button key={index} id={remera.idRemeras} onClick={() => idsRemeras(remera.idRemeras)}>
                                                     <img src={remera.link} style={{ width: '84.375px', height: '150px' }} alt={`Remera ${index}`} />
                                                 </button>
@@ -428,7 +428,7 @@ export default function Game() {
                                     </div>
                                     <div style={{ display: displayPantalon }}>
                                         {
-                                            pantalon.map((pantalon, index) => (
+                                            pantalon.filter(f => f.idpantalones !== 0).map((pantalon, index) => (
                                                 <button key={index} id={pantalon.idpantalones} onClick={() => idsPantalones(pantalon.idpantalones)}>
                                                     <img src={pantalon.link} style={{ width: '84.375px', height: '150px' }} alt={`Pantalón ${index}`} />
                                                 </button>
@@ -437,7 +437,7 @@ export default function Game() {
                                     </div>
                                     <div style={{ display: displayCalzado }}>
                                         {
-                                            calzado.map((calzado, index) => (
+                                            calzado.filter(f => f.idClazado !== 0).map((calzado, index) => (
                                                 <button key={index} id={calzado.idClazado} onClick={() => idsCalzados(calzado.idClazado)}>
                                                     <img src={calzado.link} style={{ width: '84.375px', height: '150px' }} alt={`Clazado ${index}`} />
                                                 </button>
@@ -446,7 +446,7 @@ export default function Game() {
                                     </div>
                                     <div style={{ display: displayPersonajes }}>
                                         {
-                                            personaje.map((personaje, index) => (
+                                            personaje.filter(f => f.idPersonajes !== 0).map((personaje, index) => (
                                                 <button key={index} id={personaje.idPersonajes} onClick={() => idsPersonajes(personaje.idPersonajes)}>
                                                     <img src={personaje.link} style={{ width: '84.375px', height: '150px' }} alt={`Personaje ${index}`} />
                                                 </button>
@@ -455,7 +455,7 @@ export default function Game() {
                                     </div>
                                     <div style={{ display: displayAccesorios }}>
                                         {
-                                            accesorio.map((accesorio, index) => (
+                                            accesorio.filter(f => f.idAccesorio !== 0).map((accesorio, index) => (
                                                 <button key={index} id={accesorio.idAccesorio} onClick={() => idsAccesorios(accesorio.idAccesorio)}>
                                                     <img src={accesorio.link} style={{ width: '84.375px', height: '150px' }} alt={`Accesorio ${index}`} />
                                                 </button>
@@ -464,7 +464,7 @@ export default function Game() {
                                     </div>
                                     <div style={{ display: displayMascotas }}>
                                         {
-                                            mascota.map((mascota, index) => (
+                                            mascota.filter(f => f.idMascota !== 0).map((mascota, index) => (
                                                 <button key={index} id={mascota.idMascota} onClick={() => idsMascota(mascota.idMascota)}>
                                                     <img src={mascota.link} style={{ width: '84.375px', height: '150px' }} alt={`Mascota ${index}`} />
                                                 </button>
@@ -473,11 +473,11 @@ export default function Game() {
                                     </div>
                                     <div style={{ display: displayFondos }}>
                                         {
-                                            fondo.map((fondo, index) => (
+                                            fondo.filter(f => f.idFondo !== 0).map((fondo, index) => (
                                                 <button key={index} id={fondo.idFondo} onClick={() => idsFondo(fondo.idFondo)}>
                                                     <img src={fondo.link} style={{ width: '84.375px', height: '150px' }} alt={`Fondo ${index}`} />
                                                 </button>
-                                            ))
+                                            ))                                            
                                         }
                                     </div>
                                 </div>
