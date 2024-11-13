@@ -69,20 +69,3 @@ export default function MuestraRopa() {
         </>
     );
 }
-
-
-
-/*<img src="/ropa/remeras/remera azul.png" style={{width: '225px', height: '400px'}}></img>
-            {remeras.map(remera => {
-                <>
-                <h1>HOLAAA</h1>
-                <img src={remera} style={{width: '225px', height: '400px'}}></img>
-                </>
-            })
-            }
-            <Button onClick={obtenerRemeras} text="HOLAAAA"></Button>
-
-
-
-            <img src='/ropa/remeras/remera violeta.png' style={{ width: '270px', height: '480px' }} />
-            */
