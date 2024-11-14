@@ -272,12 +272,18 @@ app.get('/getOutfits', async (req, res) => {
 
 app.post('/updateOutfitScore', async (req, res) => {
     const { idOutfit, nuevoPuntaje, nuevaCantidadVotos } = req.body;
-
+    
+    if (nuevoPuntaje === null || nuevoPuntaje === undefined) {
+        nuevoPuntaje = 0;
+    }
+    if (nuevaCantidadVotos === null || nuevaCantidadVotos === undefined) {
+        nuevaCantidadVotos = 0;
+    }
     if (!idOutfit || nuevoPuntaje === undefined || nuevaCantidadVotos === undefined) {
         return res.status(400).json({ error: "Faltan datos para actualizar el puntaje" });
     }
     try {
-        const sql = `UPDATE Outfits SET puntaje = ?, cantidadVotos = ? WHERE idOutfit = ?`;
+        const sql = `UPDATE Outfits SET puntaje = ?, cantidaddevotos = ? WHERE idOutfit = ?`;
         const resultado = await MySQL.realizarQuery(sql, [nuevoPuntaje, nuevaCantidadVotos, idOutfit]);
 
         if (resultado.affectedRows > 0) {
@@ -290,6 +296,7 @@ app.post('/updateOutfitScore', async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
+
 
 app.post('/votarOutfit', async (req, res) => {
     const { idOutfit, puntaje } = req.body;
@@ -317,3 +324,4 @@ app.post('/votarOutfit', async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
+

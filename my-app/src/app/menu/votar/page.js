@@ -13,7 +13,7 @@ export default function Votacion() {
   const [cantidaddevotos, setCantidaddevotos] = useState(Array(5).fill(0));
 
   // Function to update total score and vote count for calculating average
-  const handleVote = (index, score) => {
+  const handleVote = async (index, score) => {
     const updatedPuntajes = [...puntajes];
     updatedPuntajes[index] += score;
 
@@ -23,9 +23,33 @@ export default function Votacion() {
     setPuntajes(updatedPuntajes);
     setCantidaddevotos(updatedVotos);
 
+    await guardarPuntajeServidor(index, updatedPuntajes[index], updatedVotos[index]);
     // Optionally, save score to the server
     // saveScoreToServer(index, updatedPuntajes[index]);
   };
+
+  //mandar puntaje al servidor
+  const guardarPuntajeServidor = async (index, nuevoPuntaje, nuevaCantidadVotos) => {
+    try {
+        const response = await fetch("http://localhost:4000/updateOutfitScore", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idOutfit: index + 1,  // Asumiendo que los outfits están numerados de 1 a 5
+                nuevoPuntaje: nuevoPuntaje,
+                nuevaCantidadVotos: nuevaCantidadVotos
+            }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Error actualizando el puntaje");
+        console.log("Puntaje actualizado:", data.message);
+    } catch (error) {
+        console.error("Error al enviar el voto:", error);
+    }
+    };
+
 
   return (
     <>       
@@ -72,7 +96,7 @@ export default function Votacion() {
                       margin: '0 auto',
                       padding: '40px'
                     }}>
-                      <img src="/personajes/nano.png" style={{ width: '168.75px', height: '300px' }} alt="Jugador" />
+                      <img src="/personajes/nano.png" style={{ width: '168.75px', height: '300px' }} alt="Jugador" /> {/**aca va el outfit */}
                     </div>
 
                     {/* Display average score instead of total */}
