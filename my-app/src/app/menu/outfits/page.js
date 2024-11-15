@@ -6,8 +6,9 @@ import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
 import { useEffect, useState } from 'react';
-import { getOutfits } from '@/app/utils/api';
+import { getOutfits, getRemeras, getPantalones, getCalzados, getPersonajes, getAccesorios, getMascotas, getFondos } from '@/app/utils/api';
 import styles from '@/components/page.module.css';
+import Head from 'next/head';
 
 export default function Outfits() {
   const [outfits, setOutfit] = useState([]);
@@ -56,147 +57,58 @@ export default function Outfits() {
 
   useEffect(() => {
     obtenerRemeras();
-  }, []);
-
-  useEffect(() => {
     obtenerPantalones();
-  }, []);
-
-  useEffect(() => {
     obtenerCalzado();
-  }, []);
-
-  useEffect(() => {
     obtenerPersonajes();
-  }, []);
-
-  useEffect(() => {
     obtenerAccesorios();
-  }, []);
-
-  useEffect(() => {
     obtenerMascota();
-  }, []);
-
-  useEffect(() => {
     obtenerFondos();
+    obtenerOutfits();
   }, []);
 
   async function obtenerOutfits() {
     let res = await getOutfits();
     setOutfit(res);
-    console.log(outfits)
   }
 
-  useEffect(() => {
-    obtenerOutfits();
-  }, []);
-  
-  // Traer Personaje de Outfit
   function putPersonaje(idOutfit) {
-    let outfit = idOutfit;
-    let caracter = "";
-
-    for (let i = 0; i < personaje.length; i++) {
-      if (outfit === personaje[i].idPersonajes) {
-        caracter = personaje[i].link;
-      }
-    }
-
+    let caracter = personaje.find((p) => p.idPersonajes === idOutfit)?.link || "";
     return caracter;
   }
 
-  // Traer Remera de Outfit
   function putRemera(idOutfit) {
-    let outfit = idOutfit;
-    let shirt = "";
-
-    for (let i = 0; i < remeras.length; i++) {
-      if (outfit === remeras[i].idRemeras) {
-        shirt = remeras[i].link;
-      }
-    }
-
+    let shirt = remeras.find((r) => r.idRemeras === idOutfit)?.link || "";
     return shirt;
   }
 
-  // Traer Pantalon de Outfit
   function putPantalon(idOutfit) {
-    let outfit = idOutfit;
-    let pant = "";
-
-    for (let i = 0; i < pantalon.length; i++) {
-      if (outfit === pantalon[i].idpantalones) {
-        pant = pantalon[i].link;
-      }
-    }
-
+    let pant = pantalon.find((p) => p.idpantalones === idOutfit)?.link || "";
     return pant;
   }
 
-  // Traer Calzado de Outfit
   function putCalzado(idOutfit) {
-    let outfit = idOutfit;
-    let shoe = "";
-
-    for (let i = 0; i < calzado.length; i++) {
-      if (outfit === calzado[i].idClazado) {
-        shoe = calzado[i].link;
-      }
-    }
-
+    let shoe = calzado.find((c) => c.idClazado === idOutfit)?.link || "";
     return shoe;
   }
 
-  // Traer Accesorio de Outfit
   function putAccesorio(idOutfit) {
-    let outfit = idOutfit;
-    let acces = "";
-
-    for (let i = 0; i < accesorio.length; i++) {
-      if (outfit === accesorio[i].idAccesorio) {
-        acces = accesorio[i].link;
-      }
-    }
-
+    let acces = accesorio.find((a) => a.idAccesorio === idOutfit)?.link || "";
     return acces;
   }
 
-  // Traer Mascota de Outfit
   function putMascota(idOutfit) {
-    let outfit = idOutfit;
-    let mascot = "";
-
-    for (let i = 0; i < mascota.length; i++) {
-      if (outfit === mascota[i].idMascota) {
-        mascot = mascota[i].link;
-      }
-    }
-
+    let mascot = mascota.find((m) => m.idMascota === idOutfit)?.link || "";
     return mascot;
   }
 
-  // Traer Fondo de Outfit
   function putFondo(idOutfit) {
-    let outfit = idOutfit;
-    let background = "";
-
-    for (let i = 0; i < fondo.length; i++) {
-      if (outfit === fondo[i].idFondo) {
-        background = fondo[i].link;
-      }
-    }
-
+    let background = fondo.find((f) => f.idFondo === idOutfit)?.link || "";
     return background;
   }
 
   return (
     <>
-      <Header />
-      <Hamburguesa />
-      <HelpIcon />
-
-      <head>
+      <Head>
         <link
           href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap"
           rel="stylesheet"
@@ -205,8 +117,10 @@ export default function Outfits() {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
           rel="stylesheet"
         />
-      </head>
-      <Hamburguesa></Hamburguesa>
+      </Head>
+      <Header />
+      <Hamburguesa />
+      <HelpIcon />
       <section className="vh-100" style={{ backgroundColor: '#fbfcf7' }}>
         <div className="card-body p-2 text-center">
           <h2
@@ -226,14 +140,13 @@ export default function Outfits() {
           <div
             style={{
               width: '90%',
-              height: '75vh', // Ajusta el tamaño para que no ocupe toda la pantalla
+              height: '75vh',
               backgroundColor: '#efe8e5',
               borderRadius: '10px',
               margin: '0 auto',
               padding: '20px',
             }}
           >
-            {/**OUTFITS */}
             <div style={{ flex: 1, textAlign: 'center' }}>
               <h3 style={{ color: '#c87c8d', fontFamily: 'Lora, serif', fontSize: '1.75rem' }}>
                 Outfits
@@ -251,7 +164,6 @@ export default function Outfits() {
                   marginBottom: '20px',
                 }}
               >
-                {/**DIV JUGADOR */}
                 {outfits.slice(0, 5).map((outfit, index) => (
                   <div key={index} style={{ flex: 1, textAlign: 'center' }}>
                     <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
@@ -262,63 +174,92 @@ export default function Outfits() {
                         backgroundColor: '#fff6f2',
                         borderRadius: '10px',
                         margin: '0 auto',
-                        padding: '40px',
                       }}
                     >
                       <div className={styles.MuestraOutfit}>
-                        <div className={styles.MuestraPersonaje} style={{ padding: '10px' }}>
-                          <img
-                            src={putPersonaje(outfit[index].personaje)}
-                            alt="Avatar"
-                            style={{ width: '90%' }}
-                          />
-                        </div>
-                        <div id="remera" className={styles.MuestraRemera} style={{ padding: '10px' }}>
-                          <img
-                              src={putRemera(outfit[index].remera)}
-                              style={{ width: '90%' }}
+                        {outfit.fondo !== 0 && (
+                          <div className={styles.MuestraFondo}>
+                            <img
+                              src={putFondo(outfit.fondo)}
+                              alt="Fondo"
+                              style={{
+                                width: '90%'
+                              }}
+                            />
+                          </div>
+                        )}
+
+                        {outfit.personaje !== 0 && (
+                          <div className={styles.MuestraPersonaje}>
+                            <img
+                              src={putPersonaje(outfit.personaje)}
+                              alt="Personaje"
+                              style={{
+                                width: '90%'
+                              }}
+                            />
+                          </div>
+                        )}
+
+                        {outfit.remera !== 0 && (
+                          <div className={styles.MuestraRemera}>
+                            <img
+                              src={putRemera(outfit.remera)}
                               alt="Remera Seleccionada"
+                              style={{
+                                width: '90%'
+                              }}
                             />
-                        </div>
-                        <div id="pantalon" className={styles.MuestraPantalon} style={{ padding: '10px' }}>
+                          </div>
+                        )}
+
+                        {outfit.pantalon !== 0 && (
+                          <div className={styles.MuestraPantalon}>
                             <img
-                              src={putPantalon(outfit[index].pantalon)}
-                              style={{ width: '90%' }}
-                              alt="Pantalon Seleccionada"
+                              src={putPantalon(outfit.pantalon)}
+                              alt="Pantalón Seleccionado"
+                              style={{
+                                width: '90%'
+                              }}
                             />
-                        </div>
-                        <div id="calzado" className={styles.MuestraCalzado} style={{ padding: '10px' }}>
+                          </div>
+                        )}
+
+                        {outfit.calzado !== 0 && (
+                          <div className={styles.MuestraCalzado}>
                             <img
-                              src={putCalzado(outfit[index].calzado)}
-                              style={{ width: '90%' }}
-                              alt="Calzado Seleccionada"
+                              src={putCalzado(outfit.calzado)}
+                              alt="Calzado Seleccionado"
+                              style={{
+                                width: '90%'
+                              }}
                             />
-                        </div>
-                        <div
-                          id="accesorio"
-                          className={styles.MuestraAccesorio}
-                          style={{ padding: '10px' }}
-                        >
+                          </div>
+                        )}
+
+                        {outfit.accesorio !== 0 && (
+                          <div className={styles.MuestraAccesorio}>
                             <img
-                              src={putAccesorio(outfit[index].accesorio)}
-                              style={{ width: '90%' }}
+                              src={putAccesorio(outfit.accesorio)}
                               alt="Accesorio Seleccionado"
+                              style={{
+                                width: '90%'
+                              }}
                             />
-                        </div>
-                        <div id="mascota" className={styles.MuestraMascota} style={{ padding: '10px' }}>
+                          </div>
+                        )}
+
+                        {outfit.mascota !== 0 && (
+                          <div className={styles.MuestraMascota}>
                             <img
-                              src={putMascota(outfit[index].mascota)}
-                              style={{ width: '90%' }}
+                              src={putMascota(outfit.mascota)}
                               alt="Mascota Seleccionada"
+                              style={{
+                                width: '90%'
+                              }}
                             />
-                        </div>
-                        <div id="fondo" className={styles.MuestraFondo} style={{ padding: '10px' }}>
-                            <img
-                              src={putFondo(outfit[index].fondo)}
-                              style={{ width: '90%' }}
-                              alt="Fondo Seleccionado"
-                            />
-                        </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
