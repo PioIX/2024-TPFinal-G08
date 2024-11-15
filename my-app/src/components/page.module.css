@@ -62,6 +62,85 @@
   border-radius: 35px;
 }
 
+.MuestraOutfit {
+  position: relative;
+  width: 65%; /* O el tamaño que necesites */
+  height: 350px; /* Ajusta según sea necesario */
+  margin: 0 auto;
+}
+
+.MuestraPersonaje img,
+.MuestraRemera img {
+  width: 100%; /* Ajusta según sea necesario */
+  height: auto; /* Mantiene la proporción */
+}
+
+.MuestraPersonaje {
+  position: relative; 
+  z-index: 1;
+}
+
+.MuestraRemera {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2; 
+}
+
+.MuestraPantalon{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2; 
+}
+
+.MuestraCalzado{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2;
+}
+
+.MuestraAccesorio{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2;
+}
+
+.MuestraMascota{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 2;
+}
+
+.MuestraFondo{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 0;
+}
+
+
+.MuestraOutfit {
+  justify-content: space-around;
+  display: flex;
+  position: relative; 
+}
+
+.ropa {
+  justify-content: space-around;
+  display: flex;
+}
+
+.FotoRemera{
+  width: '270px'; 
+  height: '480px';
+}
+
+
+
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);

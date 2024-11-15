@@ -104,6 +104,18 @@ export default function Votacion() {
                       Puntaje: {cantidaddevotos[index] > 0 ? (puntajes[index] / cantidaddevotos[index]).toFixed(1) : 0}
                     </h5>
                     <h6 style={{ color: '#bf97a0' }}>Votos: {cantidaddevotos[index]}</h6>
+                  <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
+                  <div style={{
+                    width: '100%',
+                    height: '70%',
+                    backgroundColor: '#fff6f2',
+                    borderRadius: '10px',
+                    margin: '0 auto',
+                    padding: '40px'
+                  }}>
+
+                    <img src="/personajes/nano.png" style={{ width: '168.75px', height: '300px' }}></img>
+                  </div>
 
                     <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px' }}>
                       {[1, 2, 3, 4, 5].map((score) => (
