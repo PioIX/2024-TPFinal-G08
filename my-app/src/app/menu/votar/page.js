@@ -145,7 +145,7 @@ export default function Votacion() {
               }}>
                         
                  {/**DIV JUGADOR */}
-                 {outfits.slice(0, 5).map((outfit, index) => (
+                 {outfits.slice(-5).map((outfit, index) => (
                   <div key={index} style={{ flex: 1, textAlign: 'center' }}>
                     <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
                     <div
