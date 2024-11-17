@@ -354,7 +354,6 @@ app.post('/votarOutfit', async (req, res) => {
     }
 });
 
-=======
 app.get('/getFondos', async (req, res) => {
     try {
         const respuesta = await MySQL.realizarQuery("SELECT * FROM Fondos");
