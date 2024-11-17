@@ -64,70 +64,40 @@
 
 .MuestraOutfit {
   position: relative;
-  width: 65%; /* O el tamaño que necesites */
-  height: 350px; /* Ajusta según sea necesario */
+  width: 65%; /* Ajusta este tamaño según sea necesario */
+  height: 350px; /* Ajusta este tamaño según sea necesario */
   margin: 0 auto;
 }
 
-.MuestraPersonaje img,
-.MuestraRemera img {
-  width: 100%; /* Ajusta según sea necesario */
-  height: auto; /* Mantiene la proporción */
+.MuestraPersonaje,
+.MuestraRemera,
+.MuestraPantalon,
+.MuestraCalzado,
+.MuestraAccesorio,
+.MuestraMascota,
+.MuestraFondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Todos los elementos ocuparán el 100% del contenedor */
+  height: 100%; /* Para mantener la consistencia en tamaño */
 }
 
-.MuestraPersonaje {
-  position: relative; 
-  z-index: 1;
-}
-
-.MuestraRemera {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  z-index: 2; 
-}
-
-.MuestraPantalon{
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  z-index: 2; 
-}
-
-.MuestraCalzado{
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  z-index: 2;
-}
-
-.MuestraAccesorio{
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  z-index: 2;
-}
-
-.MuestraMascota{
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  z-index: 2;
-}
-
-.MuestraFondo{
-  position: absolute; 
-  top: 0; 
-  left: 0; 
+.MuestraFondo {
   z-index: 0;
 }
 
-
-.MuestraOutfit {
-  justify-content: space-around;
-  display: flex;
-  position: relative; 
+.MuestraPersonaje {
+  z-index: 1;
 }
+
+.MuestraRemera,
+.MuestraPantalon,
+.MuestraCalzado,
+.MuestraAccesorio {
+  z-index: 2;
+}
+
 
 .ropa {
   justify-content: space-around;

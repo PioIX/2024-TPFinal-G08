@@ -214,7 +214,7 @@ export default function Game() {
           ...prevOutfit,
           personaje: id 
         }));
-      
+        
         let newPersonaje = "";
         for (let i = 0; i < personaje.length; i++) {
           if (id === personaje[i].idPersonajes) {
