@@ -299,6 +299,61 @@ app.get('/getOutfits', async (req, res) => {
     }
 });
 
+app.post('/updateOutfitScore', async (req, res) => {
+    const { idOutfit, nuevoPuntaje, nuevaCantidadVotos } = req.body;
+    
+    if (nuevoPuntaje === null || nuevoPuntaje === undefined) {
+        nuevoPuntaje = 0;
+    }
+    if (nuevaCantidadVotos === null || nuevaCantidadVotos === undefined) {
+        nuevaCantidadVotos = 0;
+    }
+    if (!idOutfit || nuevoPuntaje === undefined || nuevaCantidadVotos === undefined) {
+        return res.status(400).json({ error: "Faltan datos para actualizar el puntaje" });
+    }
+    try {
+        const sql = `UPDATE Outfits SET puntaje = ?, cantidaddevotos = ? WHERE idOutfit = ?`;
+        const resultado = await MySQL.realizarQuery(sql, [nuevoPuntaje, nuevaCantidadVotos, idOutfit]);
+
+        if (resultado.affectedRows > 0) {
+            res.status(200).json({ message: "Puntaje actualizado correctamente" });
+        } else {
+            res.status(404).json({ error: "Outfit no encontrado" });
+        }
+    } catch (error) {
+        console.error("Error en actualizar puntaje de outfit: ", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
+
+
+app.post('/votarOutfit', async (req, res) => {
+    const { idOutfit, puntaje } = req.body;
+
+    if (!idOutfit || puntaje === undefined) {
+        return res.status(400).json({ error: "Faltan datos para votar el outfit" });
+    }
+
+    try {
+        // Actualizamos el puntaje acumulado y la cantidad de votos
+        const sql = `
+            UPDATE Outfits 
+            SET puntaje = puntaje + ?, cantidadVotos = cantidadVotos + 1 
+            WHERE idOutfit = ?
+        `;
+        const resultado = await MySQL.realizarQuery(sql, [puntaje, idOutfit]);
+
+        if (resultado.affectedRows > 0) {
+            res.status(200).json({ message: "Voto registrado correctamente" });
+        } else {
+            res.status(404).json({ error: "Outfit no encontrado" });
+        }
+    } catch (error) {
+        console.error("Error en votar outfit: ", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
+
 app.get('/getFondos', async (req, res) => {
     try {
         const respuesta = await MySQL.realizarQuery("SELECT * FROM Fondos");

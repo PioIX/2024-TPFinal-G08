@@ -107,30 +107,78 @@ export default function Votacion() {
     return background;
   }
 
+export default function Votacion() {
+  const [puntajes, setPuntajes] = useState(Array(5).fill(0));
+  const [cantidaddevotos, setCantidaddevotos] = useState(Array(5).fill(0));
+
+  const handleVote = async (index, score) => {
+    const updatedPuntajes = [...puntajes];
+    updatedPuntajes[index] += score;
+
+    const updatedVotos = [...cantidaddevotos];
+    updatedVotos[index] += 1;
+
+    setPuntajes(updatedPuntajes);
+    setCantidaddevotos(updatedVotos);
+
+    await guardarPuntajeServidor(index, updatedPuntajes[index], updatedVotos[index]);
+  };
+
+  const guardarPuntajeServidor = async (index, nuevoPuntaje, nuevaCantidadVotos) => {
+    try {
+      const response = await fetch("http://localhost:4000/updateOutfitScore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idOutfit: index + 1,
+          nuevoPuntaje: nuevoPuntaje,
+          nuevaCantidadVotos: nuevaCantidadVotos,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Error actualizando el puntaje");
+      console.log("Puntaje actualizado:", data.message);
+    } catch (error) {
+      console.error("Error al enviar el voto:", error);
+    }
+  };
+
   return (
-    <>       
-      <Header></Header>
-      <Hamburguesa></Hamburguesa>
+    <>
+      <Header />
+      <Hamburguesa />
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <section className="vh-100" style={{ backgroundColor: '#fbfcf7' }}>
         <div className="card-body p-5 text-center">
-          <h2 className="mb-4" style={{ color: '#c87c8d', fontSize: '2rem', marginTop: '-1%', fontFamily: 'Lora, serif' }}>Votaciones</h2>
+          <h2
+            className="mb-4"
+            style={{
+              color: '#c87c8d',
+              fontSize: '2rem',
+              marginTop: '-1%',
+              fontFamily: 'Lora, serif',
+            }}
+          >
+            Votaciones
+          </h2>
         </div>
 
         <div className="text-center" style={{ marginTop: '-10px', height: 'auto' }}>
-        <div style={{ 
-                width: '90%',  
-                height: '75vh',  // Ajusta el tamaño para que no ocupe toda la pantalla
-                backgroundColor: '#efe8e5', 
-                borderRadius: '10px', 
-                margin: '0 auto',
-                padding: '20px'
-                }}>
-                  
-            {/**OUTFITS */}
+          <div
+            style={{
+              width: '90%',
+              height: '75vh',
+              backgroundColor: '#efe8e5',
+              borderRadius: '10px',
+              margin: '0 auto',
+              padding: '20px',
+            }}
+          >
             <div style={{ flex: 1, textAlign: 'center' }}>
               <div style={{ 
                 fontFamily: 'Lora, serif', 
@@ -244,6 +292,7 @@ export default function Votacion() {
                       </div>
                     </div>
                     <h5 style={{ color: '#bf97a0' }}>Puntaje</h5>
+                    
                     <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px' }}>
                         <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>1</button>
                         <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>2</button>
@@ -254,12 +303,17 @@ export default function Votacion() {
                   </div>
                 ))}
                     <HelpIcon></HelpIcon>
+                    {/* Mover votaciones y puntajes debajo de la imagen */
+                    </div>
+                    <HelpIcon />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
-      <HelpIcon></HelpIcon>    </>
+    </>
   );
 }
 
