@@ -289,79 +289,22 @@ export default function Votacion() {
                         )}
                       </div>
                     </div>
-                    <h5 style={{ color: '#bf97a0' }}>Puntaje</h5>
-
-                    <div
-                      style={{
-                        marginTop: '10px',
-                        backgroundColor: '#fff6f2',
-                        borderRadius: '10px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        gap: '10px',
-                        padding: '10px',
-                      }}
-                    >
-                      <button
-                        className="btn btn-success"
-                        type="submit"
-                        style={{
-                          backgroundColor: '#d8bfc5',
-                          color: '#fff',
-                          border: 'none',
-                          fontFamily: 'Poppins, sans-serif',
-                        }}
-                      >
-                        1
-                      </button>
-                      <button
-                        className="btn btn-success"
-                        type="submit"
-                        style={{
-                          backgroundColor: '#d8bfc5',
-                          color: '#fff',
-                          border: 'none',
-                          fontFamily: 'Poppins, sans-serif',
-                        }}
-                      >
-                        2
-                      </button>
-                      <button
-                        className="btn btn-success"
-                        type="submit"
-                        style={{
-                          backgroundColor: '#d8bfc5',
-                          color: '#fff',
-                          border: 'none',
-                          fontFamily: 'Poppins, sans-serif',
-                        }}
-                      >
-                        3
-                      </button>
-                      <button
-                        className="btn btn-success"
-                        type="submit"
-                        style={{
-                          backgroundColor: '#d8bfc5',
-                          color: '#fff',
-                          border: 'none',
-                          fontFamily: 'Poppins, sans-serif',
-                        }}
-                      >
-                        4
-                      </button>
-                      <button
-                        className="btn btn-success"
-                        type="submit"
-                        style={{
-                          backgroundColor: '#d8bfc5',
-                          color: '#fff',
-                          border: 'none',
-                          fontFamily: 'Poppins, sans-serif',
-                        }}
-                      >
-                        5
-                      </button>
+                    {/* Display average score instead of total */}
+                    <h5 style={{ color: '#bf97a0' }}>
+                      Puntaje: {cantidaddevotos[index] > 0 ? (puntajes[index] / cantidaddevotos[index]).toFixed(1) : 0}
+                    </h5>
+                    <h6 style={{ color: '#bf97a0' }}>Votos: {cantidaddevotos[index]}</h6>
+                    <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px' }}>
+                      {[1, 2, 3, 4, 5].map((score) => (
+                        <button
+                          key={score}
+                          className="btn btn-success"
+                          onClick={() => handleVote(index, score)}
+                          style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}
+                        >
+                          {score}
+                        </button>
+                      ))}
                     </div>
                   </div>
                 ))}
