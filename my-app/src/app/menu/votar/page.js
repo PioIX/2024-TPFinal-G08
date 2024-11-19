@@ -11,7 +11,6 @@ import styles from '@/components/page.module.css';
 import Head from 'next/head';
 
 export default function Votacion() {
-
   const [outfits, setOutfit] = useState([]);
   const [remeras, setRemeras] = useState([]);
   const [pantalon, setPantalones] = useState([]);
@@ -107,7 +106,6 @@ export default function Votacion() {
     return background;
   }
 
-export default function Votacion() {
   const [puntajes, setPuntajes] = useState(Array(5).fill(0));
   const [cantidaddevotos, setCantidaddevotos] = useState(Array(5).fill(0));
 
@@ -149,10 +147,10 @@ export default function Votacion() {
     <>
       <Header />
       <Hamburguesa />
-      <head>
+      <Head>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-      </head>
+      </Head>
       <section className="vh-100" style={{ backgroundColor: '#fbfcf7' }}>
         <div className="card-body p-5 text-center">
           <h2
@@ -180,20 +178,20 @@ export default function Votacion() {
             }}
           >
             <div style={{ flex: 1, textAlign: 'center' }}>
-              <div style={{ 
-                fontFamily: 'Lora, serif', 
-                fontSize: '1.5rem', 
-                color: '#bf97a0',  
-                textAlign: 'center', 
-                display: 'flex', 
-                justifyContent: 'center',  
-                gap: '40px',  
-                marginTop: '20px', 
-                marginBottom: '20px' 
-              }}>
-                        
-                 {/**DIV JUGADOR */}
-                 {outfits.slice(-5).map((outfit, index) => (
+              <div
+                style={{
+                  fontFamily: 'Lora, serif',
+                  fontSize: '1.5rem',
+                  color: '#bf97a0',
+                  textAlign: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: '40px',
+                  marginTop: '20px',
+                  marginBottom: '20px',
+                }}
+              >
+                {outfits.slice(-5).map((outfit, index) => (
                   <div key={index} style={{ flex: 1, textAlign: 'center' }}>
                     <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
                     <div
@@ -212,7 +210,7 @@ export default function Votacion() {
                               src={putFondo(outfit.fondo)}
                               alt="Fondo"
                               style={{
-                                width: '90%'
+                                width: '90%',
                               }}
                             />
                           </div>
@@ -224,7 +222,7 @@ export default function Votacion() {
                               src={putPersonaje(outfit.personaje)}
                               alt="Personaje"
                               style={{
-                                width: '90%'
+                                width: '90%',
                               }}
                             />
                           </div>
@@ -236,7 +234,7 @@ export default function Votacion() {
                               src={putRemera(outfit.remera)}
                               alt="Remera Seleccionada"
                               style={{
-                                width: '90%'
+                                width: '90%',
                               }}
                             />
                           </div>
@@ -248,7 +246,7 @@ export default function Votacion() {
                               src={putPantalon(outfit.pantalon)}
                               alt="Pantalón Seleccionado"
                               style={{
-                                width: '90%'
+                                width: '90%',
                               }}
                             />
                           </div>
@@ -260,7 +258,7 @@ export default function Votacion() {
                               src={putCalzado(outfit.calzado)}
                               alt="Calzado Seleccionado"
                               style={{
-                                width: '90%'
+                                width: '90%',
                               }}
                             />
                           </div>
@@ -272,7 +270,7 @@ export default function Votacion() {
                               src={putAccesorio(outfit.accesorio)}
                               alt="Accesorio Seleccionado"
                               style={{
-                                width: '90%'
+                                width: '90%',
                               }}
                             />
                           </div>
@@ -284,7 +282,7 @@ export default function Votacion() {
                               src={putMascota(outfit.mascota)}
                               alt="Mascota Seleccionada"
                               style={{
-                                width: '90%'
+                                width: '90%',
                               }}
                             />
                           </div>
@@ -292,23 +290,83 @@ export default function Votacion() {
                       </div>
                     </div>
                     <h5 style={{ color: '#bf97a0' }}>Puntaje</h5>
-                    
-                    <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px' }}>
-                        <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>1</button>
-                        <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>2</button>
-                        <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>3</button>
-                        <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>4</button>
-                        <button className="btn btn-success" type="submit" style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}>5</button>
+
+                    <div
+                      style={{
+                        marginTop: '10px',
+                        backgroundColor: '#fff6f2',
+                        borderRadius: '10px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        padding: '10px',
+                      }}
+                    >
+                      <button
+                        className="btn btn-success"
+                        type="submit"
+                        style={{
+                          backgroundColor: '#d8bfc5',
+                          color: '#fff',
+                          border: 'none',
+                          fontFamily: 'Poppins, sans-serif',
+                        }}
+                      >
+                        1
+                      </button>
+                      <button
+                        className="btn btn-success"
+                        type="submit"
+                        style={{
+                          backgroundColor: '#d8bfc5',
+                          color: '#fff',
+                          border: 'none',
+                          fontFamily: 'Poppins, sans-serif',
+                        }}
+                      >
+                        2
+                      </button>
+                      <button
+                        className="btn btn-success"
+                        type="submit"
+                        style={{
+                          backgroundColor: '#d8bfc5',
+                          color: '#fff',
+                          border: 'none',
+                          fontFamily: 'Poppins, sans-serif',
+                        }}
+                      >
+                        3
+                      </button>
+                      <button
+                        className="btn btn-success"
+                        type="submit"
+                        style={{
+                          backgroundColor: '#d8bfc5',
+                          color: '#fff',
+                          border: 'none',
+                          fontFamily: 'Poppins, sans-serif',
+                        }}
+                      >
+                        4
+                      </button>
+                      <button
+                        className="btn btn-success"
+                        type="submit"
+                        style={{
+                          backgroundColor: '#d8bfc5',
+                          color: '#fff',
+                          border: 'none',
+                          fontFamily: 'Poppins, sans-serif',
+                        }}
+                      >
+                        5
+                      </button>
                     </div>
-                  </div>
-                ))}
-                    <HelpIcon></HelpIcon>
-                    {/* Mover votaciones y puntajes debajo de la imagen */
-                    </div>
-                    <HelpIcon />
                   </div>
                 ))}
               </div>
+              <HelpIcon />
             </div>
           </div>
         </div>
