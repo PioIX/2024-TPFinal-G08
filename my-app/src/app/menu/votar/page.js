@@ -6,7 +6,7 @@ import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
 import { useEffect, useState } from 'react';
-import { getOutfits, getRemeras, getPantalones, getCalzados, getPersonajes, getAccesorios, getMascotas, getFondos } from '@/app/utils/api';
+import { getOutfits, getRemeras, getPantalones, getCalzados, getPersonajes, getAccesorios, getMascotas, getFondos, postPuntajes } from '@/app/utils/api';
 import styles from '@/components/page.module.css';
 import Head from 'next/head';
 
@@ -69,6 +69,7 @@ export default function Votacion() {
   async function obtenerOutfits() {
     let res = await getOutfits();
     setOutfit(res);
+    console.log(res.slice(-5))
   }
 
   function putPersonaje(idOutfit) {
@@ -109,7 +110,7 @@ export default function Votacion() {
   const [puntajes, setPuntajes] = useState(Array(5).fill(0));
   const [cantidaddevotos, setCantidaddevotos] = useState(Array(5).fill(0));
 
-  const handleVote = async (index, score) => {
+  const handleVote = async (index, score, idOutfits) => {
     const updatedPuntajes = [...puntajes];
     updatedPuntajes[index] += score;
 
@@ -119,9 +120,13 @@ export default function Votacion() {
     setPuntajes(updatedPuntajes);
     setCantidaddevotos(updatedVotos);
 
-    await guardarPuntajeServidor(index, updatedPuntajes[index], updatedVotos[index]);
+    //await guardarPuntajeServidor(index, updatedPuntajes[index], updatedVotos[index]);
+    console.log("El id outfit: ", idOutfits)
+    console.log("El score: ", score)
+    console.log("El index: ", index)
   };
 
+/*
   const guardarPuntajeServidor = async (index, nuevoPuntaje, nuevaCantidadVotos) => {
     try {
       const response = await fetch("http://localhost:4000/updateOutfitScore", {
@@ -142,6 +147,7 @@ export default function Votacion() {
       console.error("Error al enviar el voto:", error);
     }
   };
+*/
 
   return (
     <>
@@ -299,7 +305,7 @@ export default function Votacion() {
                         <button
                           key={score}
                           className="btn btn-success"
-                          onClick={() => handleVote(index, score)}
+                          onClick={() => handleVote(index, score, outfit.idOutfits)}
                           style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}
                         >
                           {score}

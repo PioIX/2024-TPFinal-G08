@@ -160,3 +160,22 @@ export async function postOutfits(outfitData) {
 
     return result;
 }
+
+export async function postPuntajes(idOutfit, puntaje) {
+    // outfitData es el objeto que contiene los datos que necesitas enviar
+    const response = await fetch('http://localhost:4000/votarOutfit', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", // Especificamos que estamos enviando JSON
+        },
+        body: JSON.stringify(idOutfit, puntaje) // Convertimos el objeto outfitData a JSON
+    });
+
+    // Esperamos la respuesta del servidor
+    const result = await response.json();
+
+    // Mostramos el resultado
+    console.log(result);
+
+    return result;
+}
