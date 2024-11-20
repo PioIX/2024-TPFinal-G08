@@ -10,51 +10,61 @@ import { getOutfits, getRemeras, getPantalones, getCalzados, getPersonajes, getA
 import styles from '@/components/page.module.css';
 import Head from 'next/head';
 
+// Importacion para la funcion que tendra los componentes de Outfits
 export default function Outfits() {
-  const [outfits, setOutfit] = useState([]);
-  const [remeras, setRemeras] = useState([]);
+  // Declaración de estados para almacenar diferentes categorías de datos
+  const [outfits, setOutfit] = useState([]); 
+  const [remeras, setRemeras] = useState([]); 
   const [pantalon, setPantalones] = useState([]);
-  const [calzado, setCalzado] = useState([]);
+  const [calzado, setCalzado] = useState([]); 
   const [personaje, setPersonaje] = useState([]);
   const [accesorio, setAccesorio] = useState([]);
-  const [mascota, setMascota] = useState([]);
-  const [fondo, setFondo] = useState([]);
+  const [mascota, setMascota] = useState([]); 
+  const [fondo, setFondo] = useState([]); 
 
+  // Función para obtener las remeras desde el servidor y actualizar el estado
   async function obtenerRemeras() {
-    let res = await getRemeras();
-    setRemeras(res);
+    let res = await getRemeras(); // Llamada a la API 
+    setRemeras(res); // Actualización del estado con los datos recibidos
   }
 
+  // Función para obtener los pantalones desde el servidor y actualizar el estado
   async function obtenerPantalones() {
-    let res = await getPantalones();
-    setPantalones(res);
+    let res = await getPantalones(); // Llamada a la API
+    setPantalones(res); // Actualización del estado
   }
 
+  // Función para obtener el calzado desde el servidor y actualizar el estado
   async function obtenerCalzado() {
-    let res = await getCalzados();
-    setCalzado(res);
+    let res = await getCalzados(); // Llamada a la API 
+    setCalzado(res); // Actualización del estado
   }
 
+  // Función para obtener los personajes desde el servidor y actualizar el estado
   async function obtenerPersonajes() {
-    let res = await getPersonajes();
-    setPersonaje(res);
+    let res = await getPersonajes(); // Llamada a la API 
+    setPersonaje(res); // Actualización del estado
   }
 
+  // Función para obtener los accesorios desde el servidor y actualizar el estado
   async function obtenerAccesorios() {
-    let res = await getAccesorios();
-    setAccesorio(res);
+    let res = await getAccesorios(); // Llamada a la API 
+    setAccesorio(res); // Actualización del estado
   }
 
+  // Función para obtener las mascotas desde el servidor y actualizar el estado
   async function obtenerMascota() {
-    let res = await getMascotas();
-    setMascota(res);
+    let res = await getMascotas(); // Llamada a la API 
+    setMascota(res); // Actualización del estado
   }
 
+  // Función para obtener los fondos desde el servidor y actualizar el estado
   async function obtenerFondos() {
-    let res = await getFondos();
-    setFondo(res);
+    let res = await getFondos(); // Llamada a la API 
+    setFondo(res); // Actualización del estado
   }
 
+  // Hook useEffect para cargar los datos cuando el componente se hace
   useEffect(() => {
     obtenerRemeras();
     obtenerPantalones();
@@ -63,49 +73,58 @@ export default function Outfits() {
     obtenerAccesorios();
     obtenerMascota();
     obtenerFondos();
-    obtenerOutfits();
-  }, []);
+    obtenerOutfits(); // Llamamos a  las funciones para obtener ls datos datos
+  }, []); // El array vacío asegura que esto ocurre solo al hacer el componente
 
+  // Función para obtener los outfits desde el servidor y actualizar el estado
   async function obtenerOutfits() {
-    let res = await getOutfits();
-    setOutfit(res);
+    let res = await getOutfits(); // Llamada a la API 
+    setOutfit(res); // Actualización del estado
   }
 
+  // Función para obtener el enlace del personaje asociado a un outfit
   function putPersonaje(idOutfit) {
-    let caracter = personaje.find((p) => p.idPersonajes === idOutfit)?.link || "";
-    return caracter;
+    let caracter = personaje.find((p) => p.idPersonajes === idOutfit)?.link || ""; // Buscamos al  personaje por ID y obtenemos su enlace
+    return caracter; // Devuelve el enlace del personaje
   }
 
+  // Función para obtener el enlace de la remera asociada a un outfit
   function putRemera(idOutfit) {
-    let shirt = remeras.find((r) => r.idRemeras === idOutfit)?.link || "";
-    return shirt;
+    let shirt = remeras.find((r) => r.idRemeras === idOutfit)?.link || ""; // Buscamos la remera por ID
+    return shirt; // Devuelve el enlace de la remera
   }
 
+  // Función para obtener el enlace del pantalón asociado a un outfit
   function putPantalon(idOutfit) {
-    let pant = pantalon.find((p) => p.idpantalones === idOutfit)?.link || "";
-    return pant;
+    let pant = pantalon.find((p) => p.idpantalones === idOutfit)?.link || ""; // Se busca ell pantalón por ID
+    return pant; // Devuelve el enlace del pantalón
   }
 
+  // Función para obtener el enlace del calzado asociado a un outfit
   function putCalzado(idOutfit) {
-    let shoe = calzado.find((c) => c.idClazado === idOutfit)?.link || "";
-    return shoe;
+    let shoe = calzado.find((c) => c.idClazado === idOutfit)?.link || ""; // buscamos el calzado por ID
+    return shoe; //se devuelve  el enlace del calzado
   }
 
+  // Función para obtener el enlace del accesorio asociado a un outfit
   function putAccesorio(idOutfit) {
-    let acces = accesorio.find((a) => a.idAccesorio === idOutfit)?.link || "";
-    return acces;
+    let acces = accesorio.find((a) => a.idAccesorio === idOutfit)?.link || ""; //buscamos el accesorio por ID
+    return acces; // Devuelve el enlace del accesorio
   }
 
+  // Función para obtener el enlace de la mascota asociada a un outfit
   function putMascota(idOutfit) {
-    let mascot = mascota.find((m) => m.idMascota === idOutfit)?.link || "";
-    return mascot;
+    let mascot = mascota.find((m) => m.idMascota === idOutfit)?.link || ""; //buscamos la mascota por ID
+    return mascot; // devuelve el enlace de la mascota
   }
 
+  // Función para obtener el enlace del fondo asociado a un outfit
   function putFondo(idOutfit) {
-    let background = fondo.find((f) => f.idFondo === idOutfit)?.link || "";
-    return background;
+    let background = fondo.find((f) => f.idFondo === idOutfit)?.link || ""; //buscamos el fondo por ID
+    return background; // devuelve el enlace del fondo
   }
 
+  //pagina de outfits
   return (
     <>
       <Head>
@@ -118,10 +137,11 @@ export default function Outfits() {
           rel="stylesheet"
         />
       </Head>
-      <Header />
-      <Hamburguesa />
+      <Header /> 
+      <Hamburguesa /> 
       <HelpIcon />
       <section className="vh-100" style={{ backgroundColor: '#fbfcf7' }}>
+        {/* Tarjeta principal */}
         <div className="card-body p-2 text-center">
           <h2
             className="mb-4"
@@ -135,7 +155,7 @@ export default function Outfits() {
             Top 5 más votados
           </h2>
         </div>
-
+        {/* Contenedor principal */}
         <div className="text-center" style={{ marginTop: '-10px', height: 'auto' }}>
           <div
             style={{
@@ -164,7 +184,8 @@ export default function Outfits() {
                   marginBottom: '20px',
                 }}
               >
-                {outfits.slice(-5).map((outfit, index) => (
+                {/* Iteración sobre los últimos 5 outfits */}{/**el slice lo que va a hacer es dividirlo en 5 */}
+                {outfits.slice(-5).map((outfit, index) => ( 
                   <div key={index} style={{ flex: 1, textAlign: 'center' }}>
                     <h3 style={{ color: '#bf97a0' }}>Jugador</h3>
                     <div
@@ -177,10 +198,11 @@ export default function Outfits() {
                       }}
                     >
                       <div className={styles.MuestraOutfit}>
+                        {/* Renderizado condicional de cada parte del outfit */}
                         {outfit.fondo !== 0 && (
                           <div className={styles.MuestraFondo}>
                             <img
-                              src={putFondo(outfit.fondo)}
+                              src={putFondo(outfit.fondo)} // Enlace del fondo
                               alt="Fondo"
                               style={{
                                 width: '90%'
@@ -188,11 +210,11 @@ export default function Outfits() {
                             />
                           </div>
                         )}
-
                         {outfit.personaje !== 0 && (
                           <div className={styles.MuestraPersonaje}>
                             <img
                               src={putPersonaje(outfit.personaje)}
+ // Enlace del personaje
                               alt="Personaje"
                               style={{
                                 width: '90%'
@@ -204,7 +226,7 @@ export default function Outfits() {
                         {outfit.remera !== 0 && (
                           <div className={styles.MuestraRemera}>
                             <img
-                              src={putRemera(outfit.remera)}
+                              src={putRemera(outfit.remera)} // Enlace de la remera
                               alt="Remera Seleccionada"
                               style={{
                                 width: '90%'
@@ -212,11 +234,10 @@ export default function Outfits() {
                             />
                           </div>
                         )}
-
                         {outfit.pantalon !== 0 && (
                           <div className={styles.MuestraPantalon}>
                             <img
-                              src={putPantalon(outfit.pantalon)}
+                              src={putPantalon(outfit.pantalon)} // Enlace del pantalón
                               alt="Pantalón Seleccionado"
                               style={{
                                 width: '90%'
@@ -224,11 +245,10 @@ export default function Outfits() {
                             />
                           </div>
                         )}
-
                         {outfit.calzado !== 0 && (
                           <div className={styles.MuestraCalzado}>
                             <img
-                              src={putCalzado(outfit.calzado)}
+                              src={putCalzado(outfit.calzado)} // Enlace del calzado
                               alt="Calzado Seleccionado"
                               style={{
                                 width: '90%'
@@ -236,11 +256,10 @@ export default function Outfits() {
                             />
                           </div>
                         )}
-
                         {outfit.accesorio !== 0 && (
                           <div className={styles.MuestraAccesorio}>
                             <img
-                              src={putAccesorio(outfit.accesorio)}
+                              src={putAccesorio(outfit.accesorio)} // Enlace del accesorio
                               alt="Accesorio Seleccionado"
                               style={{
                                 width: '90%'
@@ -248,11 +267,10 @@ export default function Outfits() {
                             />
                           </div>
                         )}
-
                         {outfit.mascota !== 0 && (
                           <div className={styles.MuestraMascota}>
                             <img
-                              src={putMascota(outfit.mascota)}
+                              src={putMascota(outfit.mascota)} // Enlace de la mascota
                               alt="Mascota Seleccionada"
                               style={{
                                 width: '90%'

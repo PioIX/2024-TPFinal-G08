@@ -13,7 +13,7 @@ export default function Puntajes() {
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const response = await fetch('http://localhost:4000/UsuariosGet'); // Asegúrate de que la ruta sea correcta
+        const response = await fetch('http://localhost:4000/UsuariosGet'); // 
         if (!response.ok) {
           throw new Error(`Error en la respuesta: ${response.statusText}`);
         }
