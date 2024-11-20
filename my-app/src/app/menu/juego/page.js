@@ -11,6 +11,9 @@ import styles from '@/components/page.module.css';
 import Head from 'next/head';
 
 export default function Game() {
+// cada categoría tiene un estado que almacena su lista de opciones y el elemento seleccionado
+// `selectedCategory` maneja la categoría activa en la interfaz
+// categorías con un array de objetos, con un nombre y una imagen
     const [selectedCategory, setSelectedCategory] = useState('remeras');
     const categories = [
         { name: 'remeras', img: '4.png' },
@@ -22,6 +25,8 @@ export default function Game() {
         { name: 'fondos', img: '10.png' },
     ];
 
+// visualización (display) controlan qué categoría se muestra en pantalla
+// `handleCategoryChange` --> cambia la categoría activa, mostrando solo los elementos correspondientes
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         let cambiar = ""
@@ -90,6 +95,7 @@ export default function Game() {
         }
     };
 
+// Los datos son almacenados en los estados correspondientes (`remeras`, `pantalon`)
     const [displayRemeras, setdisplayRemeras] = useState("none");
     const [displayPantalon, setdisplayPantalon] = useState("none");
     const [displayCalzado, setdisplayCalzado] = useState("none");
@@ -156,6 +162,7 @@ export default function Game() {
         setFondo(res);
     }
 
+//`useEffect` --> cargar datos de cada categoría desde el backend al montar el componente
     useEffect(() => {
         obtenerRemeras();
     }, []);
@@ -493,7 +500,7 @@ export default function Game() {
                             border: 'none',
                             backgroundColor: '#bf97a0',
                             color: 'white',
-                            borderRadius: '20px', // Más redondeado
+                            borderRadius: '20px', 
                             cursor: 'pointer',
                         }}>
                             Guardar Outfit
@@ -503,7 +510,7 @@ export default function Game() {
                             border: 'none',
                             backgroundColor: '#bf97a0',
                             color: 'white',
-                            borderRadius: '20px', // Más redondeado
+                            borderRadius: '20px',
                             cursor: 'pointer',
                         }}>
                             Salir sin Guardar
