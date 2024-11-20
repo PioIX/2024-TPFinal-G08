@@ -300,8 +300,9 @@ app.get('/getOutfits', async (req, res) => {
 });
 
 app.post('/votarOutfit', async (req, res) => {
-    const { idOutfit, puntaje } = req.body;
+    const { idOutfit, puntaje, cantidadVotos } = req.body;
 
+    // Verificamos que los datos necesarios estén presentes
     if (!idOutfit || puntaje === undefined) {
         return res.status(400).json({ error: "Faltan datos para votar el outfit" });
     }
@@ -310,9 +311,12 @@ app.post('/votarOutfit', async (req, res) => {
         // Actualizamos el puntaje acumulado y la cantidad de votos
         const sql = `
             UPDATE Outfits 
-            SET puntaje = ${puntaje}, cantidadVotos = cantidadVotos + 1 
-            WHERE idOutfit = ${idOutfit}
+            SET puntaje = ${puntaje}, cantidaddevotos = ${cantidadVotos} 
+            WHERE idOutfits = ${idOutfit}
         `;
+
+        console.log(sql)
+        // Aquí asumimos que MySQL.realizarQuery ejecuta la consulta correctamente
         const resultado = await MySQL.realizarQuery(sql);
 
         if (resultado.affectedRows > 0) {
@@ -325,6 +329,7 @@ app.post('/votarOutfit', async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
+
 
 app.get('/getFondos', async (req, res) => {
     try {

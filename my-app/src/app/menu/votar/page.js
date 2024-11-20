@@ -67,10 +67,14 @@ export default function Votacion() {
   }, []);
 
   async function obtenerOutfits() {
-    let res = await getOutfits();
-    setOutfit(res);
-    console.log(res.slice(-5))
+    try {
+      const res = await getOutfits();  // Obtener la lista de outfits actualizada
+      setOutfit(res);  // Actualizar el estado con los nuevos outfits y sus puntajes actualizados
+    } catch (error) {
+      console.error("Error al obtener outfits:", error);
+    }
   }
+  
 
   function putPersonaje(idOutfit) {
     let caracter = personaje.find((p) => p.idPersonajes === idOutfit)?.link || "";
@@ -111,43 +115,55 @@ export default function Votacion() {
   const [cantidaddevotos, setCantidaddevotos] = useState(Array(5).fill(0));
 
   const handleVote = async (index, score, idOutfits) => {
+    // Actualizar puntajes y cantidad de votos en el estado local
     const updatedPuntajes = [...puntajes];
     updatedPuntajes[index] += score;
-
+  
     const updatedVotos = [...cantidaddevotos];
     updatedVotos[index] += 1;
-
-    setPuntajes(updatedPuntajes);
-    setCantidaddevotos(updatedVotos);
-
-    //await guardarPuntajeServidor(index, updatedPuntajes[index], updatedVotos[index]);
-    console.log("El id outfit: ", idOutfits)
-    console.log("El score: ", score)
-    console.log("El index: ", index)
+  
+    setPuntajes(updatedPuntajes);  // Actualizar estado local de puntajes
+    setCantidaddevotos(updatedVotos);  // Actualizar estado local de cantidad de votos
+  
+    const puntajePromedio = updatedPuntajes[index] / updatedVotos[index];
+  
+    // Preparar los datos para enviar al servidor
+    const puntajeData = {
+      idOutfit: idOutfits,  // ID del outfit
+      puntaje: puntajePromedio.toFixed(1),  // Puntaje promedio
+      cantidadVotos: updatedVotos[index],  // Cantidad de votos actualizada
+    };
+  
+    // Enviar los datos de votación al servidor
+    await postPuntajes(puntajeData);
+  
+    // Después de votar, obtener la lista de outfits actualizada del servidor
+    await obtenerOutfits();  // Función que obtiene la lista de outfits actualizada desde el servidor
   };
+  
 
-/*
-  const guardarPuntajeServidor = async (index, nuevoPuntaje, nuevaCantidadVotos) => {
-    try {
-      const response = await fetch("http://localhost:4000/updateOutfitScore", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          idOutfit: index + 1,
-          nuevoPuntaje: nuevoPuntaje,
-          nuevaCantidadVotos: nuevaCantidadVotos,
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Error actualizando el puntaje");
-      console.log("Puntaje actualizado:", data.message);
-    } catch (error) {
-      console.error("Error al enviar el voto:", error);
-    }
-  };
-*/
+  /*
+    const guardarPuntajeServidor = async (index, nuevoPuntaje, nuevaCantidadVotos) => {
+      try {
+        const response = await fetch("http://localhost:4000/updateOutfitScore", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idOutfit: index + 1,
+            nuevoPuntaje: nuevoPuntaje,
+            nuevaCantidadVotos: nuevaCantidadVotos,
+          }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Error actualizando el puntaje");
+        console.log("Puntaje actualizado:", data.message);
+      } catch (error) {
+        console.error("Error al enviar el voto:", error);
+      }
+    };
+  */
 
   return (
     <>
@@ -297,9 +313,10 @@ export default function Votacion() {
                     </div>
                     {/* Display average score instead of total */}
                     <h5 style={{ color: '#bf97a0' }}>
-                      Puntaje: {cantidaddevotos[index] > 0 ? (puntajes[index] / cantidaddevotos[index]).toFixed(1) : 0}
+                      Puntaje: {Math.ceil(outfit.puntaje, 1)}
                     </h5>
-                    <h6 style={{ color: '#bf97a0' }}>Votos: {cantidaddevotos[index]}</h6>
+                    {/* Mostrar la cantidad de votos actualizada */}
+                    <h6 style={{ color: '#bf97a0' }}>Votos: {outfit.cantidaddevotos}</h6>
                     <div style={{ marginTop: '10px', backgroundColor: '#fff6f2', borderRadius: '10px', display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px' }}>
                       {[1, 2, 3, 4, 5].map((score) => (
                         <button

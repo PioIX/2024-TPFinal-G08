@@ -161,15 +161,19 @@ export async function postOutfits(outfitData) {
     return result;
 }
 
-export async function postPuntajes(idOutfit, puntaje) {
-    // outfitData es el objeto que contiene los datos que necesitas enviar
+export async function postPuntajes(puntajeData) {
     const response = await fetch('http://localhost:4000/votarOutfit', {
         method: "POST",
         headers: {
             "Content-Type": "application/json", // Especificamos que estamos enviando JSON
         },
-        body: JSON.stringify(idOutfit, puntaje) // Convertimos el objeto outfitData a JSON
+        body: JSON.stringify(puntajeData), // Convertimos el objeto puntajeData a JSON
     });
+
+    // Asegúrate de verificar que la respuesta sea válida antes de procesarla
+    if (!response.ok) {
+        throw new Error('Error al registrar el voto');
+    }
 
     // Esperamos la respuesta del servidor
     const result = await response.json();
