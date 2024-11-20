@@ -142,6 +142,22 @@ export async function getFondos() {
     return result
 }
 
+export async function getUsuarios() {
+    //Llamo a un pedido Get del servidor
+    const response = await fetch('http://localhost:4000/UsuariosGet',{
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+          },
+    })
+
+    console.log(response)
+    //Tengo que usar el await porque la respuesta del servidor es lenta
+    const result = await response.json()
+    console.log(result)
+    return result
+}
+
 export async function postOutfits(outfitData) {
     // outfitData es el objeto que contiene los datos que necesitas enviar
     const response = await fetch('http://localhost:4000/outfit', {

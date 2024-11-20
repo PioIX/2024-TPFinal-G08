@@ -104,7 +104,7 @@ app.post('/registro', async (req, res) => {
 });
 app.get('/UsuariosGet', async (req, res) => {
     try {
-        const respuesta = await MySQL.realizarQuery("SELECT ID_Usuario, Nombre, Puntaje, CantidadOutfits FROM Usuarios ORDER BY Puntaje DESC LIMIT 10");
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Usuarios");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en UsuariosGet: ", error);
@@ -300,7 +300,7 @@ app.get('/getOutfits', async (req, res) => {
 });
 
 app.post('/votarOutfit', async (req, res) => {
-    const { idOutfit, puntaje, cantidadVotos } = req.body;
+    const { idOutfit, puntaje, cantidadVotos, promedio } = req.body;
 
     // Verificamos que los datos necesarios estén presentes
     if (!idOutfit || puntaje === undefined) {
@@ -311,7 +311,7 @@ app.post('/votarOutfit', async (req, res) => {
         // Actualizamos el puntaje acumulado y la cantidad de votos
         const sql = `
             UPDATE Outfits 
-            SET puntaje = ${puntaje}, cantidaddevotos = ${cantidadVotos} 
+            SET puntaje = ${puntaje}, cantidaddevotos = ${cantidadVotos}, promedio = ${promedio}
             WHERE idOutfits = ${idOutfit}
         `;
 

@@ -74,7 +74,7 @@ export default function Votacion() {
       console.error("Error al obtener outfits:", error);
     }
   }
-  
+
 
   function putPersonaje(idOutfit) {
     let caracter = personaje.find((p) => p.idPersonajes === idOutfit)?.link || "";
@@ -114,33 +114,34 @@ export default function Votacion() {
   const [puntajes, setPuntajes] = useState(Array(5).fill(0));
   const [cantidaddevotos, setCantidaddevotos] = useState(Array(5).fill(0));
 
-  const handleVote = async (index, score, idOutfits) => {
+  const handleVote = async (index, score, idOutfits, puntajeanterior, cantidadAnterior) => {
     // Actualizar puntajes y cantidad de votos en el estado local
     const updatedPuntajes = [...puntajes];
-    updatedPuntajes[index] += score;
-  
+    updatedPuntajes[index] = score + puntajeanterior;
+
     const updatedVotos = [...cantidaddevotos];
-    updatedVotos[index] += 1;
-  
+    updatedVotos[index] = 1 + cantidadAnterior;
+
     setPuntajes(updatedPuntajes);  // Actualizar estado local de puntajes
     setCantidaddevotos(updatedVotos);  // Actualizar estado local de cantidad de votos
-  
+
     const puntajePromedio = updatedPuntajes[index] / updatedVotos[index];
-  
+
     // Preparar los datos para enviar al servidor
     const puntajeData = {
       idOutfit: idOutfits,  // ID del outfit
-      puntaje: puntajePromedio.toFixed(1),  // Puntaje promedio
-      cantidadVotos: updatedVotos[index],  // Cantidad de votos actualizada
+      puntaje: updatedPuntajes[index],  // Puntaje promedio
+      cantidadVotos: updatedVotos[index],
+      promedio: puntajePromedio.toFixed(1) // Cantidad de votos actualizada
     };
-  
+
     // Enviar los datos de votación al servidor
     await postPuntajes(puntajeData);
-  
+
     // Después de votar, obtener la lista de outfits actualizada del servidor
     await obtenerOutfits();  // Función que obtiene la lista de outfits actualizada desde el servidor
   };
-  
+
 
   /*
     const guardarPuntajeServidor = async (index, nuevoPuntaje, nuevaCantidadVotos) => {
@@ -219,7 +220,7 @@ export default function Votacion() {
                     <div
                       style={{
                         width: '100%',
-                        height: '70%',
+                        height: '55%',
                         backgroundColor: '#fff6f2',
                         borderRadius: '10px',
                         margin: '0 auto',
@@ -227,7 +228,7 @@ export default function Votacion() {
                     >
                       <div className={styles.MuestraOutfit}>
                         {outfit.fondo !== 0 && (
-                          <div className={styles.MuestraFondo}>
+                          <div className={styles.MuestraFondo} style={{ textAlign: 'center' }}>
                             <img
                               src={putFondo(outfit.fondo)}
                               alt="Fondo"
@@ -239,7 +240,7 @@ export default function Votacion() {
                         )}
 
                         {outfit.personaje !== 0 && (
-                          <div className={styles.MuestraPersonaje}>
+                          <div className={styles.MuestraPersonaje} style={{ textAlign: 'center' }}>
                             <img
                               src={putPersonaje(outfit.personaje)}
                               alt="Personaje"
@@ -251,7 +252,7 @@ export default function Votacion() {
                         )}
 
                         {outfit.remera !== 0 && (
-                          <div className={styles.MuestraRemera}>
+                          <div className={styles.MuestraRemera} style={{ textAlign: 'center' }}>
                             <img
                               src={putRemera(outfit.remera)}
                               alt="Remera Seleccionada"
@@ -263,7 +264,7 @@ export default function Votacion() {
                         )}
 
                         {outfit.pantalon !== 0 && (
-                          <div className={styles.MuestraPantalon}>
+                          <div className={styles.MuestraPantalon} style={{ textAlign: 'center' }}>
                             <img
                               src={putPantalon(outfit.pantalon)}
                               alt="Pantalón Seleccionado"
@@ -275,7 +276,7 @@ export default function Votacion() {
                         )}
 
                         {outfit.calzado !== 0 && (
-                          <div className={styles.MuestraCalzado}>
+                          <div className={styles.MuestraCalzado} style={{ textAlign: 'center' }}>
                             <img
                               src={putCalzado(outfit.calzado)}
                               alt="Calzado Seleccionado"
@@ -287,7 +288,7 @@ export default function Votacion() {
                         )}
 
                         {outfit.accesorio !== 0 && (
-                          <div className={styles.MuestraAccesorio}>
+                          <div className={styles.MuestraAccesorio} style={{ textAlign: 'center' }}>
                             <img
                               src={putAccesorio(outfit.accesorio)}
                               alt="Accesorio Seleccionado"
@@ -299,7 +300,7 @@ export default function Votacion() {
                         )}
 
                         {outfit.mascota !== 0 && (
-                          <div className={styles.MuestraMascota}>
+                          <div className={styles.MuestraMascota} style={{ textAlign: 'center' }}>
                             <img
                               src={putMascota(outfit.mascota)}
                               alt="Mascota Seleccionada"
@@ -310,10 +311,12 @@ export default function Votacion() {
                           </div>
                         )}
                       </div>
+
+
                     </div>
                     {/* Display average score instead of total */}
                     <h5 style={{ color: '#bf97a0' }}>
-                      Puntaje: {Math.ceil(outfit.puntaje, 1)}
+                      Puntaje: {outfit.promedio}
                     </h5>
                     {/* Mostrar la cantidad de votos actualizada */}
                     <h6 style={{ color: '#bf97a0' }}>Votos: {outfit.cantidaddevotos}</h6>
@@ -322,7 +325,7 @@ export default function Votacion() {
                         <button
                           key={score}
                           className="btn btn-success"
-                          onClick={() => handleVote(index, score, outfit.idOutfits)}
+                          onClick={() => handleVote(index, score, outfit.idOutfits, outfit.puntaje, outfit.cantidaddevotos)}
                           style={{ backgroundColor: '#d8bfc5', color: '#fff', border: 'none', fontFamily: 'Poppins, sans-serif' }}
                         >
                           {score}
