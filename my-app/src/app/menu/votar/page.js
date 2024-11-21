@@ -5,8 +5,19 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import HelpIcon from '@/components/helpicon';
 import Header from '@/components/Header';
 import Hamburguesa from '@/components/Hamburguesa';
+import { useEffect, useState } from 'react';
 
 export default function Votacion() {
+
+  const [idUsuario, setidUsuario] = useState([]);
+
+  useEffect(() => {
+    let id = JSON.parse(localStorage.getItem('idUsuario'))
+
+    //let idUsuario = id.user[0].ID_Usuario;
+    setidUsuario(id)
+  }, []);
+
   return (
     <>       
       <Header></Header>

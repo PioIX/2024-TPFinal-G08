@@ -55,11 +55,9 @@ app.post('/login', async (req, res) => {
     console.log("Datos de login recibidos: ", { username, password });
 
     try {
-        const query = `SELECT * FROM Usuarios WHERE Nombre = '${username}' AND Contraseña = '${password}'`;
+        const query = `SELECT ID_Usuario FROM Usuarios WHERE Nombre = '${username}' AND Contraseña = '${password}'`;
         const resultado = await MySQL.realizarQuery(query);
         console.log(resultado);
-        req.session.userId = resultado[0]?.ID_Usuario; // Usa el primer resultado
-        console.log(req.session.userId);
         if (resultado.length > 0) {
             res.status(200).json({ message: "Login exitoso", user: resultado });
         } else {
