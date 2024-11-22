@@ -62,30 +62,42 @@
   border-radius: 35px;
 }
 
-.MuestraRopa {
-  width: 480px;
-  height: 415px;
-  float: right; 
-  position: relative; 
+.MuestraOutfit {
+  position: relative;
+  width: 65%; /* Ajusta este tamaño según sea necesario */
+  height: 350px; /* Ajusta este tamaño según sea necesario */
+  margin: 0 auto;
+}
+
+.MuestraPersonaje,
+.MuestraRemera,
+.MuestraPantalon,
+.MuestraCalzado,
+.MuestraAccesorio,
+.MuestraMascota,
+.MuestraFondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Todos los elementos ocuparán el 100% del contenedor */
+  height: 100%; /* Para mantener la consistencia en tamaño */
+}
+
+.MuestraFondo {
+  z-index: 0;
 }
 
 .MuestraPersonaje {
-  z-index: 0; 
-  position: relative; 
+  z-index: 1;
 }
 
-.MuestraRemera {
-  z-index: 1; 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
+.MuestraRemera,
+.MuestraPantalon,
+.MuestraCalzado,
+.MuestraAccesorio {
+  z-index: 2;
 }
 
-.MuestraOutfit {
-  justify-content: space-around;
-  display: flex;
-  position: relative; 
-}
 
 .ropa {
   justify-content: space-around;

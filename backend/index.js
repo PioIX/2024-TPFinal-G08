@@ -102,7 +102,7 @@ app.post('/registro', async (req, res) => {
 });
 app.get('/UsuariosGet', async (req, res) => {
     try {
-        const respuesta = await MySQL.realizarQuery("SELECT ID_Usuario, Nombre, Puntaje, CantidadOutfits FROM Usuarios ORDER BY Puntaje DESC LIMIT 10");
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Usuarios");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en UsuariosGet: ", error);
@@ -297,7 +297,6 @@ app.get('/getOutfits', async (req, res) => {
     }
 });
 
-
 app.get('/NombreGet2', async (req, res) => {
     const userId = req.query.userId; 
     try {
@@ -309,7 +308,69 @@ app.get('/NombreGet2', async (req, res) => {
         }
     } catch (error) {
         console.error("Error en NombreGet: ", error);
+      
+app.post('/votarOutfit', async (req, res) => {
+    const { idOutfit, puntaje, cantidadVotos, promedio } = req.body;
+
+    // Verificamos que los datos necesarios estén presentes
+    if (!idOutfit || puntaje === undefined) {
+        return res.status(400).json({ error: "Faltan datos para votar el outfit" });
+    }
+
+    try {
+        // Actualizamos el puntaje acumulado y la cantidad de votos
+        const sql = `
+            UPDATE Outfits 
+            SET puntaje = ${puntaje}, cantidaddevotos = ${cantidadVotos}, promedio = ${promedio}
+            WHERE idOutfits = ${idOutfit}
+        `;
+
+        console.log(sql)
+        // Aquí asumimos que MySQL.realizarQuery ejecuta la consulta correctamente
+        const resultado = await MySQL.realizarQuery(sql);
+
+        if (resultado.affectedRows > 0) {
+            res.status(200).json({ message: "Voto registrado correctamente" });
+        } else {
+            res.status(404).json({ error: "Outfit no encontrado" });
+        }
+    } catch (error) {
+        console.error("Error en votar outfit: ", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
+
+
+app.get('/getFondos', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Fondos");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
+
+app.post('/outfit', async (req, res) => {
+    console.log("Datos de registro recibidos: ", req.body);
+    const { remeras, pantalones, calzado, accesorio, mascota, fondo, personaje } = req.body;
+
+    try {
+        const sql = `INSERT INTO Outfits (personaje, remera, pantalon, accesorio, calzado, mascota, fondo) 
+                     VALUES (${personaje}, ${remeras}, ${pantalones}, ${accesorio}, ${calzado}, ${mascota}, ${fondo})`;
+
+        const resultado = await MySQL.realizarQuery(sql);
+
+        if (resultado[0].affectedRows > 0) {
+            res.status(201).json({ message: "Outfit registrado exitosamente." });
+        } else {
+            res.status(500).json({ error: "Error al registrar outfit." });
+        }
+    } catch (error) {
+        console.error("Error en registro: ", error);
+        res.status(500).json({ error: "Error interno del servidor." });
+    }
+});
+
 
