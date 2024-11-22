@@ -100,6 +100,7 @@ app.post('/registro', async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor." });
     }
 });
+
 app.get('/UsuariosGet', async (req, res) => {
     try {
         const respuesta = await MySQL.realizarQuery("SELECT * FROM Usuarios");
@@ -163,22 +164,22 @@ app.get('/CantidadOutfitsGet', async (req, res) => {
 // Ruta para obtener chats del usuario logueado
 app.get('/chats', async (req, res) => {
     if (!req.session.userId) {
-      return res.status(401).json({ error: "No autorizado" });
+        return res.status(401).json({ error: "No autorizado" });
     }
-  
+
     const userId = req.session.userId; // ID del usuario logeado
-  
+
     try {
-      // usuarios que no son el usuario logueado
-      const sql = `SELECT ID_Usuario, Nombre FROM Usuarios WHERE ID_Usuario != ${userId}`;
-      const usuarios = await MySQL.realizarQuery(sql);
-      
-      res.json(usuarios);
+        // usuarios que no son el usuario logueado
+        const sql = `SELECT ID_Usuario, Nombre FROM Usuarios WHERE ID_Usuario != ${userId}`;
+        const usuarios = await MySQL.realizarQuery(sql);
+
+        res.json(usuarios);
     } catch (error) {
-      console.error("Error en obtener usuarios: ", error);
-      res.status(500).json({ error: "Error interno del servidor" });
+        console.error("Error en obtener usuarios: ", error);
+        res.status(500).json({ error: "Error interno del servidor" });
     }
-  });
+});
 
 // Ruta para enviar mensajes
 app.post('/send-message', async (req, res) => {
@@ -214,15 +215,15 @@ app.get('/chat/:idchats', async (req, res) => {
 });
 
 app.get('/get-chats/:id', async (req, res) => {
-  const id = req.params.id;
-  try {
-    const sql = `SELECT ID_Usuario, Nombre FROM Usuarios WHERE ID_Usuario != ${id}`;
-    const usuarios = await MySQL.realizarQuery(sql);
-    res.json(usuarios);
-  } catch (error) {
-    console.error("Error en obtener usuarios: ", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
+    const id = req.params.id;
+    try {
+        const sql = `SELECT ID_Usuario, Nombre FROM Usuarios WHERE ID_Usuario != ${id}`;
+        const usuarios = await MySQL.realizarQuery(sql);
+        res.json(usuarios);
+    } catch (error) {
+        console.error("Error en obtener usuarios: ", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
 });
 
 //Juego
@@ -257,9 +258,9 @@ app.get('/getPersonajes', async (req, res) => {
     }
 });
 
-app.get('/getCalzados', async (req, res) => {
+app.get('/getAccesorios', async (req, res) => {
     try {
-        const respuesta = await MySQL.realizarQuery("SELECT * FROM Calzados");
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Accesorios");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en ContraseñaGet: ", error);
@@ -267,9 +268,9 @@ app.get('/getCalzados', async (req, res) => {
     }
 });
 
-app.get('/getAccesorios', async (req, res) => {
+app.get('/getCalzado', async (req, res) => {
     try {
-        const respuesta = await MySQL.realizarQuery("SELECT * FROM Accesorios");
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Calzado");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en ContraseñaGet: ", error);
@@ -287,90 +288,32 @@ app.get('/getMascotas', async (req, res) => {
     }
 });
 
-app.get('/getOutfits', async (req, res) => {
-    try {
-        const respuesta = await MySQL.realizarQuery("SELECT * FROM Outfits");
-        res.send(respuesta);
-    } catch (error) {
-        console.error("Error en ContraseñaGet: ", error);
-        res.status(500).send({ error: 'Error interno del servidor' });
-    }
-});
-
-app.get('/NombreGet2', async (req, res) => {
-    const userId = req.query.userId; 
-    try {
-        const respuesta = await MySQL.realizarQuery(`SELECT Nombre FROM Usuarios WHERE userID = '${userId}'`);
-        if (respuesta.length > 0) {
-            res.send(respuesta[0]); 
-        } else {
-            res.status(404).send({ error: 'Usuario no encontrado' });
-        }
-    } catch (error) {
-        console.error("Error en NombreGet: ", error);
-      
-app.post('/votarOutfit', async (req, res) => {
-    const { idOutfit, puntaje, cantidadVotos, promedio } = req.body;
-
-    // Verificamos que los datos necesarios estén presentes
-    if (!idOutfit || puntaje === undefined) {
-        return res.status(400).json({ error: "Faltan datos para votar el outfit" });
-    }
-
-    try {
-        // Actualizamos el puntaje acumulado y la cantidad de votos
-        const sql = `
-            UPDATE Outfits 
-            SET puntaje = ${puntaje}, cantidaddevotos = ${cantidadVotos}, promedio = ${promedio}
-            WHERE idOutfits = ${idOutfit}
-        `;
-
-        console.log(sql)
-        // Aquí asumimos que MySQL.realizarQuery ejecuta la consulta correctamente
-        const resultado = await MySQL.realizarQuery(sql);
-
-        if (resultado.affectedRows > 0) {
-            res.status(200).json({ message: "Voto registrado correctamente" });
-        } else {
-            res.status(404).json({ error: "Outfit no encontrado" });
-        }
-    } catch (error) {
-        console.error("Error en votar outfit: ", error);
-        res.status(500).json({ error: "Error interno del servidor" });
-    }
-});
-
-
 app.get('/getFondos', async (req, res) => {
     try {
         const respuesta = await MySQL.realizarQuery("SELECT * FROM Fondos");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en ContraseñaGet: ", error);
-
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
 
-app.post('/outfit', async (req, res) => {
-    console.log("Datos de registro recibidos: ", req.body);
-    const { remeras, pantalones, calzado, accesorio, mascota, fondo, personaje } = req.body;
+app.post('/registrarOutfit', async (req, res) => {
+    console.log("Datos del outfit recibidos:", req.body);
+    const { personaje, remeras, pantalones, accesorio, calzado, mascota, fondo } = req.body;
 
     try {
         const sql = `INSERT INTO Outfits (personaje, remera, pantalon, accesorio, calzado, mascota, fondo) 
-                     VALUES (${personaje}, ${remeras}, ${pantalones}, ${accesorio}, ${calzado}, ${mascota}, ${fondo})`;
-
+                    VALUES ('${personaje}', '${remeras}', '${pantalones}', '${accesorio}', '${calzado}', '${mascota}', '${fondo}')`;
         const resultado = await MySQL.realizarQuery(sql);
 
-        if (resultado[0].affectedRows > 0) {
+        if (resultado.affectedRows > 0) {
             res.status(201).json({ message: "Outfit registrado exitosamente." });
         } else {
             res.status(500).json({ error: "Error al registrar outfit." });
         }
     } catch (error) {
-        console.error("Error en registro: ", error);
-        res.status(500).json({ error: "Error interno del servidor." });
+        console.error("Error en registrar outfit:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
     }
 });
-
-
