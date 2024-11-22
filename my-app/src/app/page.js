@@ -4,12 +4,13 @@ const idUser = -1
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useLogin } from '@/hooks/useLogin';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getUserid } from '@/app/utils/api'
 import Header from '@/components/Header';
 
 export default function Login() {
   const [idUser, setIdUser] = useLogin()
+  const [nombreUser, setNombreUser] = useState([])
 
   async function login() {
     const username = document.getElementById("mail").value;
@@ -30,10 +31,13 @@ export default function Login() {
       });
 
       if (response.ok) {
+
         const result = await response.json();
         console.log(result);
         let id = result.user[0].ID_Usuario;
+        let nombre = username
         setIdUser(id);
+        setNombreUser(nombre)
         document.cookie = `idUser=${idUser}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
         window.location.href = '/menu';
 
@@ -52,7 +56,8 @@ export default function Login() {
       window.location.href = '/menu';
     }
     localStorage.setItem('idUsuario', JSON.stringify(idUser))
-  }, [idUser]);
+    localStorage.setItem('nombreUsuario', JSON.stringify(nombreUser))
+  }, [idUser, nombreUser]);
 
 
   async function registro() {

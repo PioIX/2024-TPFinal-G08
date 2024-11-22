@@ -159,7 +159,7 @@ export async function getUsuarios() {
 
 export async function postOutfits(outfitData) {
     // outfitData es el objeto que contiene los datos que necesitas enviar
-    const response = await fetch('http://localhost:4000/outfit', {
+    const response = await fetch('http://localhost:4000/registrarOutfit', {
         method: "POST",
         headers: {
             "Content-Type": "application/json", // Especificamos que estamos enviando JSON

@@ -11,6 +11,18 @@ import styles from '@/components/page.module.css';
 import Head from 'next/head';
 
 export default function Game() {
+    const [idUsuario, setidUsuario] = useState([]);
+    const [nombreUser, setNombreUser] = useState([])
+
+    useEffect(() => {
+        let id = JSON.parse(localStorage.getItem('idUsuario'))
+        let nombre = JSON.parse(localStorage.getItem('nombreUsuario'))
+
+        //let idUsuario = id.user[0].ID_Usuario;
+        setidUsuario(id)
+        setNombreUser(nombre)
+    }, []);
+
     const [selectedCategory, setSelectedCategory] = useState('remeras');
     const categories = [
         { name: 'remeras', img: '4.png' },
@@ -352,7 +364,7 @@ export default function Game() {
                                     padding: '3px 5px',
                                     marginBottom: '8px'
                                 }}>
-                                    Usuario
+                                    {nombreUser}
                                 </div>
                                 <div className={styles.MuestraOutfit}>
                                     <div className={styles.MuestraPersonaje} style={{ padding: '10px' }}>

@@ -21,12 +21,17 @@ export default function Votacion() {
   const [fondo, setFondo] = useState([]);
 
   const [idUsuario, setidUsuario] = useState([]);
+  const [nombreUser, setNombreUser] = useState([])
 
   useEffect(() => {
     let id = JSON.parse(localStorage.getItem('idUsuario'))
+    let nombre = JSON.parse(localStorage.getItem('nombreUsuario'))
 
     //let idUsuario = id.user[0].ID_Usuario;
     setidUsuario(id)
+    setNombreUser(nombre)
+    console.log("id usuario: ", id)
+    console.log("nombre: ", nombre)
   }, []);
 
 
@@ -40,7 +45,7 @@ export default function Votacion() {
     setPantalones(res);
   }
 
-  async function obtenerCalzado() {
+  async function obtenerCalzados() {
     let res = await getCalzados();
     setCalzado(res);
   }
@@ -63,12 +68,13 @@ export default function Votacion() {
   async function obtenerFondos() {
     let res = await getFondos();
     setFondo(res);
+    console.log("id object: ", idUsuario)
   }
 
   useEffect(() => {
     obtenerRemeras();
     obtenerPantalones();
-    obtenerCalzado();
+    obtenerCalzados();
     obtenerPersonajes();
     obtenerAccesorios();
     obtenerMascota();

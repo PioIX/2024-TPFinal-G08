@@ -60,6 +60,7 @@ app.post('/login', async (req, res) => {
         console.log(resultado);
         if (resultado.length > 0) {
             res.status(200).json({ message: "Login exitoso", user: resultado });
+            return console.log(username, password)
         } else {
             res.status(401).json({ error: "Credenciales incorrectas" });
         }
@@ -268,9 +269,9 @@ app.get('/getAccesorios', async (req, res) => {
     }
 });
 
-app.get('/getCalzado', async (req, res) => {
+app.get('/getCalzados', async (req, res) => {
     try {
-        const respuesta = await MySQL.realizarQuery("SELECT * FROM Calzado");
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Calzados");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en ContraseñaGet: ", error);
@@ -291,6 +292,16 @@ app.get('/getMascotas', async (req, res) => {
 app.get('/getFondos', async (req, res) => {
     try {
         const respuesta = await MySQL.realizarQuery("SELECT * FROM Fondos");
+        res.send(respuesta);
+    } catch (error) {
+        console.error("Error en ContraseñaGet: ", error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+app.get('/getOutfits', async (req, res) => {
+    try {
+        const respuesta = await MySQL.realizarQuery("SELECT * FROM Outfits");
         res.send(respuesta);
     } catch (error) {
         console.error("Error en ContraseñaGet: ", error);

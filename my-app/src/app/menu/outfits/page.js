@@ -30,7 +30,7 @@ export default function Outfits() {
     setPantalones(res);
   }
 
-  async function obtenerCalzado() {
+  async function obtenerCalzados() {
     let res = await getCalzados();
     setCalzado(res);
   }
@@ -58,7 +58,7 @@ export default function Outfits() {
   useEffect(() => {
     obtenerRemeras();
     obtenerPantalones();
-    obtenerCalzado();
+    obtenerCalzados();
     obtenerPersonajes();
     obtenerAccesorios();
     obtenerMascota();

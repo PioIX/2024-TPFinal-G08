@@ -93,6 +93,7 @@
 
 .MuestraRemera,
 .MuestraPantalon,
+.MuestraMascota,
 .MuestraCalzado,
 .MuestraAccesorio {
   z-index: 2;
