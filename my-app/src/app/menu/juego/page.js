@@ -52,7 +52,7 @@ export default function Game() {
             setdisplayMascotas("none")
             setdisplayFondos("none")
         }
-        else if (category == "personajes"){
+        else if (category == "personajes") {
             setdisplayRemeras("none")
             setdisplayPantalon("none")
             setdisplayCalzado("none")
@@ -61,7 +61,7 @@ export default function Game() {
             setdisplayMascotas("none")
             setdisplayFondos("none")
         }
-        else if (category == "accesorios"){
+        else if (category == "accesorios") {
             setdisplayRemeras("none")
             setdisplayPantalon("none")
             setdisplayCalzado("none")
@@ -70,7 +70,7 @@ export default function Game() {
             setdisplayMascotas("none")
             setdisplayFondos("none")
         }
-        else if (category == "mascotas"){
+        else if (category == "mascotas") {
             setdisplayRemeras("none")
             setdisplayPantalon("none")
             setdisplayCalzado("none")
@@ -79,7 +79,7 @@ export default function Game() {
             setdisplayMascotas(cambiar)
             setdisplayFondos("none")
         }
-        else if (category == "fondos"){
+        else if (category == "fondos") {
             setdisplayRemeras("none")
             setdisplayPantalon("none")
             setdisplayCalzado("none")
@@ -206,119 +206,119 @@ export default function Game() {
         mascota: 0,
         fondo: 0,
         personaje: 0
-    });  
+    });
 
 
     function idsPersonajes(id) {
         setOutfit((prevOutfit) => ({
-          ...prevOutfit,
-          personaje: id 
+            ...prevOutfit,
+            personaje: id
         }));
-        
+
         let newPersonaje = "";
         for (let i = 0; i < personaje.length; i++) {
-          if (id === personaje[i].idPersonajes) {
-            newPersonaje = personaje[i].link;
-          }
+            if (id === personaje[i].idPersonajes) {
+                newPersonaje = personaje[i].link;
+            }
         }
         console.log(newPersonaje);
         setPersonajeSeleccionado(newPersonaje);
-      }
+    }
 
     function idsRemeras(id) {
         setOutfit((prevOutfit) => ({
-          ...prevOutfit,
-          remeras: id             
+            ...prevOutfit,
+            remeras: id
         }));
 
         let newRemera = "";
         for (let i = 0; i < remeras.length; i++) {
-          if (id === remeras[i].idRemeras) {
-            newRemera = remeras[i].link;
-          }
+            if (id === remeras[i].idRemeras) {
+                newRemera = remeras[i].link;
+            }
         }
         setRemeraSeleccionada(newRemera);
     }
-      
+
 
     function idsPantalones(id) {
         setOutfit((prevOutfit) => ({
-          ...prevOutfit,
-          pantalones: id
+            ...prevOutfit,
+            pantalones: id
         }));
-    
+
         let newPantalon = "";
         for (let i = 0; i < pantalon.length; i++) {
-          if (id === pantalon[i].idpantalones) {
-            newPantalon = pantalon[i].link;
-          }
+            if (id === pantalon[i].idpantalones) {
+                newPantalon = pantalon[i].link;
+            }
         }
         console.log(newPantalon);
         setPantalonSeleccionada(newPantalon);
-      }
+    }
 
-      function idsCalzados(id) {
+    function idsCalzados(id) {
         setOutfit((prevOutfit) => ({
-          ...prevOutfit,
-          calzado: id
+            ...prevOutfit,
+            calzado: id
         }));
-    
+
         let newCalzado = "";
         for (let i = 0; i < calzado.length; i++) {
-          if (id === calzado[i].idClazado) {
-            newCalzado = calzado[i].link;
-          }
+            if (id === calzado[i].idClazado) {
+                newCalzado = calzado[i].link;
+            }
         }
         setCalzadoSeleccionado(newCalzado)
-      }
+    }
 
-      function idsAccesorios(id) {
+    function idsAccesorios(id) {
         setOutfit((prevOutfit) => ({
-          ...prevOutfit,
-          accesorio: id 
+            ...prevOutfit,
+            accesorio: id
         }));
-      
+
         let newAccesorio = "";
         for (let i = 0; i < accesorio.length; i++) {
-          if (id === accesorio[i].idAccesorio) {
-            newAccesorio = accesorio[i].link;
-          }
+            if (id === accesorio[i].idAccesorio) {
+                newAccesorio = accesorio[i].link;
+            }
         }
         console.log(newAccesorio);
         setAccesorioSeleccionado(newAccesorio)
-      }
+    }
 
-      function idsMascota(id) {
+    function idsMascota(id) {
         setOutfit((prevOutfit) => ({
-          ...prevOutfit,
-          mascota: id
+            ...prevOutfit,
+            mascota: id
         }));
-      
+
         let newMascota = "";
         for (let i = 0; i < mascota.length; i++) {
-          if (id === mascota[i].idMascota) {
-            newMascota = mascota[i].link;
-          }
+            if (id === mascota[i].idMascota) {
+                newMascota = mascota[i].link;
+            }
         }
         console.log(newMascota);
         setMascotaSeleccionada(newMascota)
-      }
+    }
 
-      function idsFondo(id) {
+    function idsFondo(id) {
         setOutfit((prevOutfit) => ({
-          ...prevOutfit,
-          fondo: id  
+            ...prevOutfit,
+            fondo: id
         }));
-      
+
         let newFondo = "";
         for (let i = 0; i < fondo.length; i++) {
-          if (id === fondo[i].idFondo) {
-            newFondo = fondo[i].link;
-          }
+            if (id === fondo[i].idFondo) {
+                newFondo = fondo[i].link;
+            }
         }
         console.log(newFondo);
         setFondoSeleccionado(newFondo)
-      }
+    }
 
 
     return (
@@ -454,31 +454,103 @@ export default function Game() {
                                         }
                                     </div>
                                     <div style={{ display: displayAccesorios }}>
-                                        {
-                                            accesorio.filter(f => f.idAccesorio !== 0).map((accesorio, index) => (
-                                                <button key={index} id={accesorio.idAccesorio} onClick={() => idsAccesorios(accesorio.idAccesorio)}>
-                                                    <img src={accesorio.link} style={{ width: '84.375px', height: '150px' }} alt={`Accesorio ${index}`} />
-                                                </button>
-                                            ))
-                                        }
+                                        {accesorio.map((accesorio, index) => (
+                                            <React.Fragment key={index}>
+                                                {accesorio.idAccesorio === 0 ? (
+                                                    <button
+                                                        onClick={() => setAccesorioSeleccionado("")}
+                                                        style={{
+                                                            padding: '10px',
+                                                            border: 'none',
+                                                            backgroundColor: '#f2f2f2',
+                                                            color: '#bf97a0',
+                                                            borderRadius: '5px',
+                                                            cursor: 'pointer',
+                                                        }}
+                                                    >
+                                                        Quitar
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        id={accesorio.idAccesorio}
+                                                        onClick={() => idsAccesorios(accesorio.idAccesorio)}
+                                                    >
+                                                        <img
+                                                            src={accesorio.link}
+                                                            style={{ width: '84.375px', height: '150px' }}
+                                                            alt={`Accesorio ${index}`}
+                                                        />
+                                                    </button>
+                                                )}
+                                            </React.Fragment>
+                                        ))}
                                     </div>
+                                    {/* Mascotas */}
                                     <div style={{ display: displayMascotas }}>
-                                        {
-                                            mascota.filter(f => f.idMascota !== 0).map((mascota, index) => (
-                                                <button key={index} id={mascota.idMascota} onClick={() => idsMascota(mascota.idMascota)}>
-                                                    <img src={mascota.link} style={{ width: '84.375px', height: '150px' }} alt={`Mascota ${index}`} />
-                                                </button>
-                                            ))
-                                        }
+                                        {mascota.map((mascota, index) => (
+                                            <React.Fragment key={index}>
+                                                {mascota.idMascota === 0 ? (
+                                                    <button
+                                                        onClick={() => setMascotaSeleccionada("")}
+                                                        style={{
+                                                            padding: '10px',
+                                                            border: 'none',
+                                                            backgroundColor: '#f2f2f2',
+                                                            color: '#bf97a0',
+                                                            borderRadius: '5px',
+                                                            cursor: 'pointer',
+                                                        }}
+                                                    >
+                                                        Quitar
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        id={mascota.idMascota}
+                                                        onClick={() => idsMascota(mascota.idMascota)}
+                                                    >
+                                                        <img
+                                                            src={mascota.link}
+                                                            style={{ width: '84.375px', height: '150px' }}
+                                                            alt={`Mascota ${index}`}
+                                                        />
+                                                    </button>
+                                                )}
+                                            </React.Fragment>
+                                        ))}
                                     </div>
+
+                                    {/* Fondos */}
                                     <div style={{ display: displayFondos }}>
-                                        {
-                                            fondo.filter(f => f.idFondo !== 0).map((fondo, index) => (
-                                                <button key={index} id={fondo.idFondo} onClick={() => idsFondo(fondo.idFondo)}>
-                                                    <img src={fondo.link} style={{ width: '84.375px', height: '150px' }} alt={`Fondo ${index}`} />
-                                                </button>
-                                            ))                                            
-                                        }
+                                        {fondo.map((fondo, index) => (
+                                            <React.Fragment key={index}>
+                                                {fondo.idFondo === 0 ? (
+                                                    <button
+                                                        onClick={() => setFondoSeleccionado("")}
+                                                        style={{
+                                                            padding: '10px',
+                                                            border: 'none',
+                                                            backgroundColor: '#f2f2f2',
+                                                            color: '#bf97a0',
+                                                            borderRadius: '5px',
+                                                            cursor: 'pointer',
+                                                        }}
+                                                    >
+                                                        Quitar
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        id={fondo.idFondo}
+                                                        onClick={() => idsFondo(fondo.idFondo)}
+                                                    >
+                                                        <img
+                                                            src={fondo.link}
+                                                            style={{ width: '84.375px', height: '150px' }}
+                                                            alt={`Fondo ${index}`}
+                                                        />
+                                                    </button>
+                                                )}
+                                            </React.Fragment>
+                                        ))}
                                     </div>
                                 </div>
 
