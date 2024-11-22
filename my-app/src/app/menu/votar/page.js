@@ -20,6 +20,16 @@ export default function Votacion() {
   const [mascota, setMascota] = useState([]);
   const [fondo, setFondo] = useState([]);
 
+  const [idUsuario, setidUsuario] = useState([]);
+
+  useEffect(() => {
+    let id = JSON.parse(localStorage.getItem('idUsuario'))
+
+    //let idUsuario = id.user[0].ID_Usuario;
+    setidUsuario(id)
+  }, []);
+
+
   async function obtenerRemeras() {
     let res = await getRemeras();
     setRemeras(res);

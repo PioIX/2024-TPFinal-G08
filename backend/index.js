@@ -55,11 +55,9 @@ app.post('/login', async (req, res) => {
     console.log("Datos de login recibidos: ", { username, password });
 
     try {
-        const query = `SELECT * FROM Usuarios WHERE Nombre = '${username}' AND Contraseña = '${password}'`;
+        const query = `SELECT ID_Usuario FROM Usuarios WHERE Nombre = '${username}' AND Contraseña = '${password}'`;
         const resultado = await MySQL.realizarQuery(query);
         console.log(resultado);
-        req.session.userId = resultado[0]?.ID_Usuario; // Usa el primer resultado
-        console.log(req.session.userId);
         if (resultado.length > 0) {
             res.status(200).json({ message: "Login exitoso", user: resultado });
         } else {
@@ -299,6 +297,18 @@ app.get('/getOutfits', async (req, res) => {
     }
 });
 
+app.get('/NombreGet2', async (req, res) => {
+    const userId = req.query.userId; 
+    try {
+        const respuesta = await MySQL.realizarQuery(`SELECT Nombre FROM Usuarios WHERE userID = '${userId}'`);
+        if (respuesta.length > 0) {
+            res.send(respuesta[0]); 
+        } else {
+            res.status(404).send({ error: 'Usuario no encontrado' });
+        }
+    } catch (error) {
+        console.error("Error en NombreGet: ", error);
+      
 app.post('/votarOutfit', async (req, res) => {
     const { idOutfit, puntaje, cantidadVotos, promedio } = req.body;
 
@@ -337,6 +347,7 @@ app.get('/getFondos', async (req, res) => {
         res.send(respuesta);
     } catch (error) {
         console.error("Error en ContraseñaGet: ", error);
+
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
@@ -361,6 +372,5 @@ app.post('/outfit', async (req, res) => {
         res.status(500).json({ error: "Error interno del servidor." });
     }
 });
-
 
 

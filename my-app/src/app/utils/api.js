@@ -1,6 +1,5 @@
 "use client"
 
-
 //TRAE REMERAS
 export async function getRemeras() {
     //Llamo a un pedido Get del servidor

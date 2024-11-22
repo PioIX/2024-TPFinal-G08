@@ -1,7 +1,8 @@
-import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-export default function Hamburguesa() {
+import { useState, useEffect } from "react";
+
+export default function Hamburguesa(usuarioLogueado) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleNavbar = () => {
@@ -18,45 +19,54 @@ export default function Hamburguesa() {
         // Redirige a la página de inicio
         window.location.href = '/'; // Cambia esto a '/' para redirigir a la página de inicio
     };
-    
+
+    const [idUsuario, setidUsuario] = useState([]);
+
+    useEffect(() => {
+        let id = JSON.parse(localStorage.getItem('idUsuario'))
+
+        //let idUsuario = id.user[0].ID_Usuario;
+        setidUsuario(id)
+    }, []);
+
     return (
         <>
-            <nav className="navbar" style={{ 
-                position: 'absolute', 
-                top: 0, 
-                right: 0, 
-                backgroundColor: '#fbfcf7', 
-                width: '4%' 
+            <nav className="navbar" style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                backgroundColor: '#fbfcf7',
+                width: '4%'
             }}>
-                <button 
-                    onClick={toggleNavbar} 
-                    className="navbar-toggler" 
-                    type="button" 
-                    aria-controls="navbarToggleExternalContent3" 
-                    aria-expanded={isOpen} 
+                <button
+                    onClick={toggleNavbar}
+                    className="navbar-toggler"
+                    type="button"
+                    aria-controls="navbarToggleExternalContent3"
+                    aria-expanded={isOpen}
                     aria-label="Toggle navigation">
                     <i className="fas fa-bars"></i>
                 </button>
             </nav>
-            <div className={`collapse ${isOpen ? 'show' : ''}`} id="navbarToggleExternalContent3" style={{ 
+            <div className={`collapse ${isOpen ? 'show' : ''}`} id="navbarToggleExternalContent3" style={{
                 backgroundColor: 'rgb(239, 232, 229)',
-                position: 'absolute', 
+                position: 'absolute',
                 right: 0,
                 borderRadius: 10
             }}>
                 <div className="shadow-3 p-4">
-                    <p style={{ textDecoration: 'none', color: '#d8bfc5' }}>Usuario: </p>
-                    <button 
-                        className="btn btn-link btn-block border-bottom m-0 text-start" 
-                        style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }} 
+                    <p style={{ textDecoration: 'none', color: '#d8bfc5' }}>Usuario: {idUsuario}</p>
+                    <button
+                        className="btn btn-link btn-block border-bottom m-0 text-start"
+                        style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }}
                         onClick={handleMenuClick}
                     >
                         Menu
                     </button>
                     <br />
-                    <button 
-                        className="btn btn-link btn-block border-bottom m-0 text-start" 
-                        style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }} 
+                    <button
+                        className="btn btn-link btn-block border-bottom m-0 text-start"
+                        style={{ textDecoration: 'none', color: '#d8bfc5', backgroundColor: '#fbfcf7' }}
                         onClick={handleLogout} // Maneja el clic en el botón de Log Out
                     >
                         Log Out
